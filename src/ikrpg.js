@@ -13,6 +13,8 @@ import { ConsumableData } from "./items/consumable-data.js";
 import { IKRPGConsumableSheet } from "./sheets/consumable-sheet.js";
 import { MiscellaneousData } from "./items/miscellaneous-data.js";
 import { IKRPGMiscellaneousSheet } from "./sheets/miscellaneous-sheet.js";
+import { ArchetypeData } from "./items/archetype-data.js";
+import { IKRPGArchetypeSheet } from "./sheets/archetype-sheet.js";
 
 // Helper para obter os idiomas disponíveis no manifesto do sistema
 function getAvailableLanguages() {
@@ -68,6 +70,7 @@ Hooks.once("init", () => {
   CONFIG.Item.dataModels.armor = ArmorData;
   CONFIG.Item.dataModels.consumable = ConsumableData;
   CONFIG.Item.dataModels.miscellaneous = MiscellaneousData;
+  CONFIG.Item.dataModels.archetype = ArchetypeData;
 
   // Registrar Fichas de Itens
   Items.registerSheet("ikrpg", IKRPGRangedWeaponSheet, {
@@ -110,6 +113,12 @@ Hooks.once("init", () => {
     types: ["miscellaneous"],
     makeDefault: true,
     label: "IKRPG.Miscellaneous.SheetName"
+  });
+
+  Items.registerSheet("ikrpg", IKRPGArchetypeSheet, {
+    types: ["archetype"],
+    makeDefault: true,
+    label: "IKRPG.Archetype.SheetName"
   });
 
   const langs = getAvailableLanguages();

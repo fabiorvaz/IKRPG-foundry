@@ -1,0 +1,71 @@
+<form class="ikrpg-item-sheet {{cssClass}}" autocomplete="off">
+  <!-- Cabeçalho da Ficha -->
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'IKRPG.Common.Name'}}" required />
+      </h1>
+      <div class="item-meta">
+        <span class="item-type-badge">{{localize "IKRPG.Archetype.Badge"}}</span>
+        <div class="item-identifier-group">
+          <label>{{localize "IKRPG.Common.Identifier"}}:</label>
+          <input name="system.identifier" type="text" value="{{system.identifier}}" placeholder="ex: gifted" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Abas de Navegação -->
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="properties"><i class="fas fa-sliders-h"></i> {{localize "IKRPG.Common.Properties"}}</a>
+    <a class="item" data-tab="description"><i class="fas fa-file-alt"></i> {{localize "IKRPG.Common.Description"}}</a>
+  </nav>
+
+  <!-- Corpo da Ficha -->
+  <section class="sheet-body">
+    <!-- Aba de Propriedades Mecânicas -->
+    <div class="tab properties active" data-group="primary" data-tab="properties">
+      <div class="properties-grid">
+        <!-- Nome do Tipo de Arquétipo -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-cog"></i> {{localize "IKRPG.Archetype.Type"}}</span>
+          <div class="form-fields">
+            <input name="system.archetypeType" type="text" value="{{system.archetypeType}}" placeholder="ex: Conjurador, Intelectual, Poderoso, Habilidoso" />
+          </div>
+        </div>
+
+        <!-- Benefício Inicial -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-star"></i> {{localize "IKRPG.Archetype.StartingBenefit"}}</span>
+          <div class="form-fields">
+            <input name="system.startingBenefit" type="text" value="{{system.startingBenefit}}" placeholder="ex: Virtuoso" />
+          </div>
+        </div>
+
+        <!-- Habilidades do Arquétipo (Identificadores) -->
+        <div class="form-group abilities-list-group">
+          <span class="form-label"><i class="fas fa-list"></i> {{localize "IKRPG.Archetype.Abilities"}}</span>
+          <div class="form-fields" style="display: flex; flex-direction: column; gap: 5px;">
+            {{#each system.abilities}}
+            <div class="ability-row" style="display: flex; gap: 5px; align-items: center; width: 100%;">
+              <input name="system.abilities.{{@index}}" type="text" value="{{this}}" placeholder="ex: sentry" style="flex: 1;" />
+              <a class="delete-ability-btn" data-index="{{@index}}" title="{{localize 'IKRPG.Archetype.DeleteAbility'}}" style="cursor: pointer; padding: 5px; color: #ff5555;">
+                <i class="fas fa-trash"></i>
+              </a>
+            </div>
+            {{/each}}
+            <a class="add-ability-btn" style="margin-top: 5px; cursor: pointer; color: #008800; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">
+              <i class="fas fa-plus"></i> {{localize "IKRPG.Archetype.AddAbility"}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aba de Descrição / Benefícios -->
+    <div class="tab description" data-group="primary" data-tab="description">
+      {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+    </div>
+  </section>
+</form>

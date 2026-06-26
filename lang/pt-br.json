@@ -110,6 +110,16 @@
       "Price": "Preço (PO)",
       "Weight": "Peso (Kg)"
     },
+    "Archetype": {
+      "Badge": "Arquétipo",
+      "SheetName": "Ficha de Arquétipo",
+      "Type": "Nome",
+      "StartingBenefit": "Benefício Inicial",
+      "Description": "Descrição",
+      "Abilities": "Identificadores de Habilidades",
+      "AddAbility": "Adicionar Identificador",
+      "DeleteAbility": "Remover Identificador"
+    },
     "Miscellaneous": {
       "Badge": "Miscelânea",
       "SheetName": "Ficha de Miscelânea",

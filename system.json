@@ -29,7 +29,8 @@
       "spell",
       "armor",
       "consumable",
-      "miscellaneous"
+      "miscellaneous",
+      "archetype"
     ]
   },
   "license": "MIT"
