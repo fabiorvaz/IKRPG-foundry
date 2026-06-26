@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 1,
+  "sourceKey": "IKRPG.Source.CoreBook",
+  "examples": [
+    {
+      "_note": "Militar — atributo fixo no livro; copie o bloco para skills[] sem _note",
+      "id": "pistol",
+      "category": "military",
+      "linkedAttribute": "dexterity",
+      "level": 0,
+      "nameKey": "IKRPG.DefaultSkills.Pistol",
+      "trainedOnly": false,
+      "general": false
+    },
+    {
+      "_note": "Social — linkedAttribute opcional; jogador pode trocar na ficha",
+      "id": "negotiation",
+      "category": "social",
+      "linkedAttribute": "intellect",
+      "level": 0,
+      "nameKey": "IKRPG.DefaultSkills.Negotiation",
+      "trainedOnly": false,
+      "general": false
+    },
+    {
+      "_note": "Social geral — pode omitir linkedAttribute; general: true",
+      "id": "etiquette",
+      "category": "social",
+      "level": 0,
+      "nameKey": "IKRPG.DefaultSkills.Etiquette",
+      "trainedOnly": false,
+      "general": true
+    },
+    {
+      "_note": "Profissional — atributo fixo; trainedOnly conforme o manual",
+      "id": "mechanikal-engineering",
+      "category": "professional",
+      "linkedAttribute": "intellect",
+      "level": 0,
+      "nameKey": "IKRPG.DefaultSkills.MechanikalEngineering",
+      "trainedOnly": true,
+      "general": false
+    },
+    {
+      "_note": "Profissional geral — general: true; atributo fixo no livro",
+      "id": "athletics",
+      "category": "professional",
+      "linkedAttribute": "physique",
+      "level": 0,
+      "nameKey": "IKRPG.DefaultSkills.Athletics",
+      "trainedOnly": false,
+      "general": true
+    }
+  ],
+  "skills": [
+    {
+      "id": "pistol",
+      "category": "military",
+      "linkedAttribute": "dexterity",
+      "level": 0,
+      "nameKey": "IKRPG.DefaultSkills.Pistol",
+      "trainedOnly": false,
+      "general": false
+    },
+    {
+      "id": "negotiation",
+      "category": "social",
+      "linkedAttribute": "intellect",
+      "level": 0,
+      "nameKey": "IKRPG.DefaultSkills.Negotiation",
+      "trainedOnly": false,
+      "general": false
+    },
+    {
+      "id": "etiquette",
+      "category": "social",
+      "level": 0,
+      "nameKey": "IKRPG.DefaultSkills.Etiquette",
+      "trainedOnly": false,
+      "general": true
+    },
+    {
+      "id": "mechanikal-engineering",
+      "category": "professional",
+      "linkedAttribute": "intellect",
+      "level": 0,
+      "nameKey": "IKRPG.DefaultSkills.MechanikalEngineering",
+      "trainedOnly": true,
+      "general": false
+    },
+    {
+      "id": "athletics",
+      "category": "professional",
+      "linkedAttribute": "physique",
+      "level": 0,
+      "nameKey": "IKRPG.DefaultSkills.Athletics",
+      "trainedOnly": false,
+      "general": true
+    }
+  ]
+}

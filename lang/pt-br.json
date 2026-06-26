@@ -1,0 +1,90 @@
+{
+  "IKRPG": {
+    "Source": {
+      "CoreBook": "Iron Kingdom RPG — Manual Base (PT-BR). Preencher a partir das tabelas do livro."
+    },
+    "DefaultSkills": {
+      "Pistol": "Pistola",
+      "Negotiation": "Negociação",
+      "Etiquette": "Etiqueta",
+      "MechanikalEngineering": "Engenharia Mecanika",
+      "Athletics": "Atletismo"
+    },
+    "Attribute": {
+      "Physique": "Físico",
+      "Strength": "Força",
+      "Speed": "Velocidade",
+      "Agility": "Agilidade",
+      "Dexterity": "Destreza",
+      "Mastery": "Maestria",
+      "Intellect": "Intelecto",
+      "Arcana": "Arcana",
+      "Perception": "Percepção"
+    },
+    "AttributeMapping": {
+      "Físico": "physique",
+      "Fisico": "physique",
+      "Força": "strength",
+      "Forca": "strength",
+      "Velocidade": "speed",
+      "Agilidade": "agility",
+      "Destreza": "dexterity",
+      "Maestria": "mastery",
+      "Intelecto": "intellect",
+      "Arcana": "arcana",
+      "Percepção": "perception",
+      "Percepcao": "perception"
+    },
+    "Weapon": {
+      "Melee": "Arma Corpo a Corpo",
+      "Ranged": "Arma à Distância",
+      "Name": "Nome",
+      "Identifier": "Identificador",
+      "MilitarySkill": "Perícia Militar",
+      "AttackModifier": "Modificador de Ataque",
+      "Power": "Poder",
+      "Range": "Alcance",
+      "AmmunitionType": "Tipo de Munição",
+      "AmmoCapacity": "Capacidade de Munição",
+      "AmmoCurrent": "Munição Atual",
+      "RangedSheet": "Ficha de Arma à Distância",
+      "MeleeSheet": "Ficha de Arma Corpo a Corpo",
+      "Equipped": "Equipado",
+      "Description": "Descrição"
+    },
+    "Settings": {
+      "DefaultLanguage": {
+        "Name": "Idioma Padrão do Sistema",
+        "Hint": "Selecione o idioma padrão para a exibição de fichas, rolagens e outros conteúdos do sistema."
+      },
+      "CustomSkillsMenu": {
+        "Name": "Configuração de Perícias",
+        "Label": "Editar Lista de Perícias",
+        "Hint": "Abre o painel de gerenciamento de perícias militares, profissionais e sociais do mundo."
+      },
+      "CustomSkills": {
+        "Title": "Configurar Perícias do Sistema",
+        "RestoreDefaults": "Restaurar Padrões",
+        "RestoreDefaultsHint": "Exclui as configurações atuais e recarrega a lista padrão de perícias.",
+        "UpdateSheets": "Atualizar Fichas",
+        "UpdateSheetsHint": "Atualiza a lista de perícias em todas as fichas de personagens existentes no mundo (Atualmente simulado).",
+        "AddSkill": "Adicionar Perícia",
+        "Save": "Salvar Configurações",
+        "CategoryMilitary": "Perícias Militares",
+        "CategoryProfessional": "Perícias Profissionais",
+        "CategorySocial": "Perícias Sociais",
+        "FieldName": "Nome da Perícia",
+        "FieldId": "Identificador (ID)",
+        "FieldAttribute": "Atributo Associado",
+        "FieldTrained": "Somente Treinado",
+        "FieldGeneral": "Geral",
+        "SelectAttribute": "-- Selecione --",
+        "AddSuccess": "Perícia adicionada.",
+        "DeleteSuccess": "Perícia removida.",
+        "RestoreSuccess": "Lista de perícias restaurada para o padrão com sucesso!",
+        "UpdateSheetsSuccess": "Atualização das fichas de personagens simulada com sucesso!",
+        "NotifySave": "Configurações de perícias salvas com sucesso!"
+      }
+    }
+  }
+}

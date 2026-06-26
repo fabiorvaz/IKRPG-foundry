@@ -1,0 +1,513 @@
+/* ikrpg.css */
+
+/* Importar fonte do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --ikrpg-bg-dark: #12131a;
+  --ikrpg-bg-card: rgba(26, 29, 41, 0.75);
+  --ikrpg-border-color: rgba(255, 255, 255, 0.08);
+  --ikrpg-border-focus: #cda869; /* Bronze/Dourado Steampunk */
+  --ikrpg-text-primary: #f0f0f5;
+  --ikrpg-text-secondary: #9aa0b5;
+  --ikrpg-accent-gold: #cda869;
+  --ikrpg-accent-blue: #4a90e2;
+  --ikrpg-accent-teal: #00bfa5;
+  --ikrpg-accent-red: #e04f5f;
+  --ikrpg-font-outfit: 'Outfit', sans-serif;
+  --ikrpg-transition-speed: 0.2s;
+}
+
+/* Janela de Configurações Geral do Sistema */
+.ikrpg-settings-form {
+  font-family: var(--ikrpg-font-outfit);
+  color: var(--ikrpg-text-primary);
+  background: var(--ikrpg-bg-dark);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Banner de cabeçalho com gradiente industrial/steampunk */
+.ikrpg-settings-form .settings-header-banner {
+  background: linear-gradient(135deg, #1f2230 0%, #11131a 100%);
+  border: 1px solid var(--ikrpg-border-color);
+  border-left: 4px solid var(--ikrpg-accent-gold);
+  border-radius: 6px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+}
+
+.ikrpg-settings-form .settings-header-banner h2 {
+  margin: 0 0 6px 0;
+  font-weight: 600;
+  color: var(--ikrpg-accent-gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 1.4rem;
+  border-bottom: none;
+}
+
+.ikrpg-settings-form .settings-header-banner p {
+  margin: 0;
+  color: var(--ikrpg-text-secondary);
+  font-size: 0.95rem;
+  line-height: 1.4;
+}
+
+.ikrpg-settings-form .settings-header-banner .legend-note {
+  margin-top: 10px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  color: var(--ikrpg-text-secondary);
+}
+
+/* Container de scroll para a listagem das tabelas */
+.ikrpg-settings-form .skills-list-container {
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 6px;
+  margin-bottom: 16px;
+}
+
+/* Scrollbar personalizada */
+.ikrpg-settings-form .skills-list-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.ikrpg-settings-form .skills-list-container::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 3px;
+}
+
+.ikrpg-settings-form .skills-list-container::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 3px;
+}
+
+.ikrpg-settings-form .skills-list-container::-webkit-scrollbar-thumb:hover {
+  background: var(--ikrpg-accent-gold);
+}
+
+/* Seções de Categorias como painéis flutuantes */
+.ikrpg-settings-form .skills-category-section {
+  background: var(--ikrpg-bg-card);
+  border: 1px solid var(--ikrpg-border-color);
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.ikrpg-settings-form .skills-category-section .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 8px;
+}
+
+.ikrpg-settings-form .skills-category-section .section-header h3 {
+  margin: 0;
+  font-weight: 500;
+  color: var(--ikrpg-text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.15rem;
+  border-bottom: none;
+}
+
+/* Estrutura das tabelas de pericias */
+.ikrpg-settings-form .skills-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 8px;
+}
+
+.ikrpg-settings-form .skills-table th {
+  text-align: left;
+  color: var(--ikrpg-accent-gold);
+  font-weight: 500;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  padding: 8px 12px;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+}
+
+.ikrpg-settings-form .skills-table td {
+  padding: 8px 12px;
+  vertical-align: middle;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.ikrpg-settings-form .skills-table tr.skill-row {
+  transition: background-color var(--ikrpg-transition-speed) ease;
+}
+
+.ikrpg-settings-form .skills-table tr.skill-row:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+.ikrpg-settings-form .skills-table .empty-placeholder {
+  text-align: center;
+  padding: 24px;
+  color: var(--ikrpg-text-secondary);
+  font-style: italic;
+}
+
+/* Inputs das células */
+.ikrpg-settings-form .skills-table input[type="text"],
+.ikrpg-settings-form .skills-table select {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--ikrpg-text-primary);
+  border-radius: 4px;
+  padding: 6px 10px;
+  width: 100%;
+  font-family: var(--ikrpg-font-outfit);
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  transition: border-color var(--ikrpg-transition-speed) ease, box-shadow var(--ikrpg-transition-speed) ease;
+}
+
+.ikrpg-settings-form .skills-table input[type="text"]:focus,
+.ikrpg-settings-form .skills-table select:focus {
+  border-color: var(--ikrpg-accent-gold);
+  box-shadow: 0 0 8px rgba(205, 168, 105, 0.3);
+  outline: none;
+}
+
+/* Inputs de Checkbox Centralizados */
+.ikrpg-settings-form .skills-table input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--ikrpg-accent-gold);
+  cursor: pointer;
+  margin: 0 auto;
+  display: block;
+}
+
+/* Alinhamento auxiliar */
+.ikrpg-settings-form .text-center {
+  text-align: center;
+}
+
+/* Estilos de botões */
+.ikrpg-settings-form button {
+  font-family: var(--ikrpg-font-outfit);
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  border-radius: 4px;
+  font-weight: 500;
+  border: none;
+  transition: transform 0.1s ease, filter var(--ikrpg-transition-speed) ease, box-shadow var(--ikrpg-transition-speed) ease;
+}
+
+.ikrpg-settings-form button:hover {
+  filter: brightness(1.2);
+}
+
+.ikrpg-settings-form button:active {
+  transform: scale(0.96);
+}
+
+/* Botão Adicionar Perícia */
+.ikrpg-settings-form .btn-primary-ikrpg {
+  background: linear-gradient(135deg, #1b4d3e 0%, #00bfa5 100%);
+  color: #ffffff;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  box-shadow: 0 2px 6px rgba(0, 191, 165, 0.25);
+}
+
+/* Botão Excluir Perícia (Crimson) */
+.ikrpg-settings-form .btn-danger-ikrpg {
+  background: linear-gradient(135deg, #7c1a22 0%, #e04f5f 100%);
+  color: #ffffff;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  box-shadow: 0 2px 6px rgba(224, 79, 95, 0.25);
+}
+
+/* Botão Salvar (Steampunk Copper) */
+.ikrpg-settings-form .btn-save-ikrpg {
+  background: linear-gradient(135deg, #8a5a22 0%, #cda869 100%);
+  color: #11131a;
+  padding: 10px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(205, 168, 105, 0.3);
+}
+
+.ikrpg-settings-form .btn-save-ikrpg:hover {
+  box-shadow: 0 4px 18px rgba(205, 168, 105, 0.5);
+}
+
+/* Botões Secundários */
+.ikrpg-settings-form .btn-secondary-ikrpg {
+  background: linear-gradient(135deg, #2b3040 0%, #43495f 100%);
+  color: var(--ikrpg-text-primary);
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Rodapé do Formulário */
+.ikrpg-settings-form .form-footer-buttons {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  margin-top: auto;
+}
+
+.ikrpg-settings-form .form-footer-buttons .footer-left {
+  display: flex;
+  gap: 12px;
+}
+
+.ikrpg-settings-form .form-footer-buttons .footer-right {
+  display: flex;
+}
+
+/* ========================================== */
+/* ESTILOS DAS FICHAS DE ITENS (ITEM SHEETS)  */
+/* ========================================== */
+
+.ikrpg-item-sheet {
+  font-family: var(--ikrpg-font-outfit);
+  color: var(--ikrpg-text-primary);
+  background: var(--ikrpg-bg-dark);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+/* Cabeçalho da Ficha de Item */
+.ikrpg-item-sheet .sheet-header {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  background: linear-gradient(135deg, #1f2230 0%, #11131a 100%);
+  border-bottom: 2px solid var(--ikrpg-accent-gold);
+}
+
+.ikrpg-item-sheet .profile-img {
+  width: 72px;
+  height: 72px;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  object-fit: cover;
+  cursor: pointer;
+  transition: border-color var(--ikrpg-transition-speed) ease;
+}
+
+.ikrpg-item-sheet .profile-img:hover {
+  border-color: var(--ikrpg-accent-gold);
+}
+
+.ikrpg-item-sheet .header-fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.ikrpg-item-sheet .header-fields .charname input {
+  background: transparent;
+  border: none;
+  font-family: var(--ikrpg-font-outfit);
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--ikrpg-accent-gold);
+  width: 100%;
+  padding: 0 4px;
+}
+
+.ikrpg-item-sheet .header-fields .charname input:focus {
+  outline: none;
+  border-bottom: 1px dashed var(--ikrpg-accent-gold);
+}
+
+.ikrpg-item-sheet .item-meta {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-top: 6px;
+  font-size: 0.9rem;
+}
+
+.ikrpg-item-sheet .item-type-badge {
+  background: linear-gradient(135deg, #8a5a22 0%, #cda869 100%);
+  color: #11131a;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+}
+
+.ikrpg-item-sheet .item-identifier-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--ikrpg-text-secondary);
+}
+
+.ikrpg-item-sheet .item-identifier-group input {
+  background: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 4px;
+  color: var(--ikrpg-text-primary);
+  font-family: var(--ikrpg-font-outfit);
+  font-size: 0.85rem;
+  padding: 2px 6px;
+  width: 150px;
+}
+
+/* Abas de Navegação */
+.ikrpg-item-sheet .sheet-tabs {
+  background: rgba(18, 19, 26, 0.9);
+  border-bottom: 1px solid var(--ikrpg-border-color);
+  padding: 0 16px;
+  display: flex;
+  gap: 2px;
+}
+
+.ikrpg-item-sheet .sheet-tabs .item {
+  color: var(--ikrpg-text-secondary);
+  font-weight: 500;
+  padding: 10px 16px;
+  border-bottom: 2px solid transparent;
+  transition: all var(--ikrpg-transition-speed) ease;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.ikrpg-item-sheet .sheet-tabs .item:hover {
+  color: var(--ikrpg-text-primary);
+}
+
+.ikrpg-item-sheet .sheet-tabs .item.active {
+  color: var(--ikrpg-accent-gold);
+  border-color: var(--ikrpg-accent-gold);
+  text-shadow: 0 0 8px rgba(205, 168, 105, 0.2);
+}
+
+/* Corpo da Ficha */
+.ikrpg-item-sheet .sheet-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+}
+
+.ikrpg-item-sheet .tab {
+  height: 100%;
+  display: none;
+}
+
+.ikrpg-item-sheet .tab.active {
+  display: block;
+}
+
+.ikrpg-item-sheet .tab.description {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Grid de Propriedades */
+.ikrpg-item-sheet .properties-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  background: var(--ikrpg-bg-card);
+  border: 1px solid var(--ikrpg-border-color);
+  border-radius: 8px;
+  padding: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(10px);
+}
+
+.ikrpg-item-sheet .form-group {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.ikrpg-item-sheet .form-group:last-child {
+  border-bottom: none;
+}
+
+.ikrpg-item-sheet .form-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--ikrpg-text-secondary);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+.ikrpg-item-sheet .form-label i {
+  color: var(--ikrpg-accent-gold);
+  width: 16px;
+  text-align: center;
+}
+
+.ikrpg-item-sheet .form-fields {
+  width: 60%;
+}
+
+.ikrpg-item-sheet .form-fields input[type="text"],
+.ikrpg-item-sheet .form-fields input[type="number"],
+.ikrpg-item-sheet .form-fields select {
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  color: var(--ikrpg-text-primary);
+  border-radius: 4px;
+  padding: 6px 10px;
+  width: 100%;
+  font-family: var(--ikrpg-font-outfit);
+  font-size: 0.9rem;
+  box-sizing: border-box;
+  transition: border-color var(--ikrpg-transition-speed) ease, box-shadow var(--ikrpg-transition-speed) ease;
+}
+
+.ikrpg-item-sheet .form-fields input[type="text"]:focus,
+.ikrpg-item-sheet .form-fields input[type="number"]:focus,
+.ikrpg-item-sheet .form-fields select:focus {
+  border-color: var(--ikrpg-accent-gold);
+  box-shadow: 0 0 8px rgba(205, 168, 105, 0.3);
+  outline: none;
+}
+
+/* Alinhamento de Checkbox */
+.ikrpg-item-sheet .checkbox-group .form-fields {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.ikrpg-item-sheet input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--ikrpg-accent-gold);
+  cursor: pointer;
+}
+

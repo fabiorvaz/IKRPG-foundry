@@ -1,0 +1,209 @@
+<form class="ikrpg-settings-form" autocomplete="off" onsubmit="event.preventDefault();">
+  <!-- Cabeçalho Banner -->
+  <div class="settings-header-banner">
+    <h2><i class="fas fa-list-ul"></i> {{localize "IKRPG.Settings.CustomSkills.Title"}}</h2>
+    <p>{{localize "IKRPG.Settings.CustomSkillsMenu.Hint"}}</p>
+    <div class="legend-note">
+      <small><strong>Nota:</strong> O "Identificador (ID)" deve ser em letras minúsculas e inglês (ex: <code>pistol</code>) para que itens e regras funcionem de forma consistente independente da tradução.</small>
+    </div>
+  </div>
+
+  <!-- Container Geral da Listagem -->
+  <div class="skills-list-container">
+    
+    <!-- CATEGORIA MILITAR -->
+    <div class="skills-category-section">
+      <div class="section-header">
+        <h3><i class="fas fa-shield-alt"></i> {{localize "IKRPG.Settings.CustomSkills.CategoryMilitary"}}</h3>
+        <button class="add-skill-btn btn-primary-ikrpg" data-category="military" title="{{localize 'IKRPG.Settings.CustomSkills.AddSkill'}}">
+          <i class="fas fa-plus"></i> {{localize "IKRPG.Settings.CustomSkills.AddSkill"}}
+        </button>
+      </div>
+      
+      <div class="table-responsive-wrapper">
+        <table class="skills-table">
+          <thead>
+            <tr>
+              <th>{{localize "IKRPG.Settings.CustomSkills.FieldName"}}</th>
+              <th>{{localize "IKRPG.Settings.CustomSkills.FieldId"}}</th>
+              <th>{{localize "IKRPG.Settings.CustomSkills.FieldAttribute"}}</th>
+              <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldTrained"}}</th>
+              <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldGeneral"}}</th>
+              <th class="text-center">Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each military}}
+            <tr class="skill-row" data-category="military" data-index="{{this.index}}">
+              <td>
+                <input type="text" class="field-name" value="{{this.displayName}}" placeholder="ex: Pistola" required />
+              </td>
+              <td>
+                <input type="text" class="field-id" value="{{this.id}}" placeholder="ex: pistol" required />
+              </td>
+              <td>
+                <select class="field-attribute">
+                  {{#select this.linkedAttribute}}
+                  {{#each ../attributes as |label val|}}
+                  <option value="{{val}}">{{label}}</option>
+                  {{/each}}
+                  {{/select}}
+                </select>
+              </td>
+              <td class="text-center">
+                <input type="checkbox" class="field-trained" {{checked this.trainedOnly}} />
+              </td>
+              <td class="text-center">
+                <input type="checkbox" class="field-general" {{checked this.general}} />
+              </td>
+              <td class="text-center">
+                <button class="delete-skill-btn btn-danger-ikrpg" data-index="{{this.index}}" title="Excluir Perícia">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            {{/each}}
+            {{#unless military.length}}
+            <tr>
+              <td colspan="6" class="empty-placeholder">Nenhuma perícia militar configurada.</td>
+            </tr>
+            {{/unless}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CATEGORIA PROFISSIONAL -->
+    <div class="skills-category-section">
+      <div class="section-header">
+        <h3><i class="fas fa-tools"></i> {{localize "IKRPG.Settings.CustomSkills.CategoryProfessional"}}</h3>
+        <button class="add-skill-btn btn-primary-ikrpg" data-category="professional" title="{{localize 'IKRPG.Settings.CustomSkills.AddSkill'}}">
+          <i class="fas fa-plus"></i> {{localize "IKRPG.Settings.CustomSkills.AddSkill"}}
+        </button>
+      </div>
+      
+      <div class="table-responsive-wrapper">
+        <table class="skills-table">
+          <thead>
+            <tr>
+              <th>{{localize "IKRPG.Settings.CustomSkills.FieldName"}}</th>
+              <th>{{localize "IKRPG.Settings.CustomSkills.FieldId"}}</th>
+              <th>{{localize "IKRPG.Settings.CustomSkills.FieldAttribute"}}</th>
+              <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldTrained"}}</th>
+              <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldGeneral"}}</th>
+              <th class="text-center">Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each professional}}
+            <tr class="skill-row" data-category="professional" data-index="{{this.index}}">
+              <td>
+                <input type="text" class="field-name" value="{{this.displayName}}" placeholder="ex: Atletismo" required />
+              </td>
+              <td>
+                <input type="text" class="field-id" value="{{this.id}}" placeholder="ex: athletics" required />
+              </td>
+              <td>
+                <select class="field-attribute">
+                  {{#select this.linkedAttribute}}
+                  {{#each ../attributes as |label val|}}
+                  <option value="{{val}}">{{label}}</option>
+                  {{/each}}
+                  {{/select}}
+                </select>
+              </td>
+              <td class="text-center">
+                <input type="checkbox" class="field-trained" {{checked this.trainedOnly}} />
+              </td>
+              <td class="text-center">
+                <input type="checkbox" class="field-general" {{checked this.general}} />
+              </td>
+              <td class="text-center">
+                <button class="delete-skill-btn btn-danger-ikrpg" data-index="{{this.index}}" title="Excluir Perícia">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            {{/each}}
+            {{#unless professional.length}}
+            <tr>
+              <td colspan="6" class="empty-placeholder">Nenhuma perícia profissional configurada.</td>
+            </tr>
+            {{/unless}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- CATEGORIA SOCIAL -->
+    <div class="skills-category-section">
+      <div class="section-header">
+        <h3><i class="fas fa-comments"></i> {{localize "IKRPG.Settings.CustomSkills.CategorySocial"}}</h3>
+        <button class="add-skill-btn btn-primary-ikrpg" data-category="social" title="{{localize 'IKRPG.Settings.CustomSkills.AddSkill'}}">
+          <i class="fas fa-plus"></i> {{localize "IKRPG.Settings.CustomSkills.AddSkill"}}
+        </button>
+      </div>
+      
+      <div class="table-responsive-wrapper">
+        <table class="skills-table">
+          <thead>
+            <tr>
+              <th>{{localize "IKRPG.Settings.CustomSkills.FieldName"}}</th>
+              <th>{{localize "IKRPG.Settings.CustomSkills.FieldId"}}</th>
+              <!-- Atributo associado omitido propositalmente -->
+              <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldTrained"}}</th>
+              <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldGeneral"}}</th>
+              <th class="text-center">Excluir</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each social}}
+            <tr class="skill-row" data-category="social" data-index="{{this.index}}">
+              <td>
+                <input type="text" class="field-name" value="{{this.displayName}}" placeholder="ex: Negociação" required />
+              </td>
+              <td>
+                <input type="text" class="field-id" value="{{this.id}}" placeholder="ex: negotiation" required />
+              </td>
+              <td class="text-center">
+                <input type="checkbox" class="field-trained" {{checked this.trainedOnly}} />
+              </td>
+              <td class="text-center">
+                <input type="checkbox" class="field-general" {{checked this.general}} />
+              </td>
+              <td class="text-center">
+                <button class="delete-skill-btn btn-danger-ikrpg" data-index="{{this.index}}" title="Excluir Perícia">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </td>
+            </tr>
+            {{/each}}
+            {{#unless social.length}}
+            <tr>
+              <td colspan="5" class="empty-placeholder">Nenhuma perícia social configurada.</td>
+            </tr>
+            {{/unless}}
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Botões de Controle Inferiores -->
+  <div class="form-footer-buttons">
+    <div class="footer-left">
+      <button type="button" class="restore-defaults-btn btn-secondary-ikrpg" title="{{localize 'IKRPG.Settings.CustomSkills.RestoreDefaultsHint'}}">
+        <i class="fas fa-undo"></i> {{localize "IKRPG.Settings.CustomSkills.RestoreDefaults"}}
+      </button>
+      <button type="button" class="update-sheets-btn btn-secondary-ikrpg" title="{{localize 'IKRPG.Settings.CustomSkills.UpdateSheetsHint'}}">
+        <i class="fas fa-sync"></i> {{localize "IKRPG.Settings.CustomSkills.UpdateSheets"}}
+      </button>
+    </div>
+    <div class="footer-right">
+      <button type="submit" class="save-settings-btn btn-save-ikrpg">
+        <i class="fas fa-save"></i> {{localize "IKRPG.Settings.CustomSkills.Save"}}
+      </button>
+    </div>
+  </div>
+</form>

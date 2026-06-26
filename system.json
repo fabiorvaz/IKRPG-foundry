@@ -1,0 +1,25 @@
+{
+  "id": "ikrpg",
+  "title": "Iron Kingdoms RPG (2004)",
+  "description": "Sistema de RPG para os Reinos de Ferro (2004) adaptado para Foundry VTT v13.",
+  "version": "0.1.0",
+  "author": "Fabio-Vaz",
+  "compatibility": {
+    "minimum": "13",
+    "verified": "13"
+  },
+  "esmodules": [
+    "src/ikrpg.js"
+  ],
+  "styles": [
+    "styles/ikrpg.css"
+  ],
+  "languages": [
+    {
+      "lang": "pt-br",
+      "name": "Português (Brasil)",
+      "path": "lang/pt-br.json"
+    }
+  ],
+  "license": "MIT"
+}

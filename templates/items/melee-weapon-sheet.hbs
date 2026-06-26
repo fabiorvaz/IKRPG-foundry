@@ -1,0 +1,75 @@
+<form class="ikrpg-item-sheet {{cssClass}}" autocomplete="off">
+  <!-- Cabeçalho da Ficha -->
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'IKRPG.Weapon.Name'}}" required />
+      </h1>
+      <div class="item-meta">
+        <span class="item-type-badge">{{localize "IKRPG.Weapon.Melee"}}</span>
+        <div class="item-identifier-group">
+          <label>{{localize "IKRPG.Weapon.Identifier"}}:</label>
+          <input name="system.identifier" type="text" value="{{system.identifier}}" placeholder="ex: mechanikal-sword" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Abas de Navegação -->
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="properties"><i class="fas fa-sliders-h"></i> Propriedades</a>
+    <a class="item" data-tab="description"><i class="fas fa-file-alt"></i> {{localize "IKRPG.Weapon.Description"}}</a>
+  </nav>
+
+  <!-- Corpo da Ficha -->
+  <section class="sheet-body">
+    <!-- Aba de Propriedades Mecânicas -->
+    <div class="tab properties active" data-group="primary" data-tab="properties">
+      <div class="properties-grid">
+        <!-- Perícia Militar -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-shield-alt"></i> {{localize "IKRPG.Weapon.MilitarySkill"}}</span>
+          <div class="form-fields">
+            <select name="system.militarySkill">
+              {{#select system.militarySkill}}
+              {{#each militarySkills}}
+              <option value="{{this.id}}">{{this.name}}</option>
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+        </div>
+
+        <!-- Modificador de Ataque -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-bullseye"></i> {{localize "IKRPG.Weapon.AttackModifier"}}</span>
+          <div class="form-fields">
+            <input name="system.attackModifier" type="number" value="{{system.attackModifier}}" step="1" />
+          </div>
+        </div>
+
+        <!-- Poder (Dano) -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-fire"></i> {{localize "IKRPG.Weapon.Power"}} (POW)</span>
+          <div class="form-fields">
+            <input name="system.power" type="number" value="{{system.power}}" min="0" step="1" />
+          </div>
+        </div>
+
+        <!-- Equipado -->
+        <div class="form-group checkbox-group">
+          <span class="form-label"><i class="fas fa-tshirt"></i> {{localize "IKRPG.Weapon.Equipped"}}</span>
+          <div class="form-fields">
+            <input name="system.equipped" type="checkbox" {{checked system.equipped}} />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aba de Descrição / Regras -->
+    <div class="tab description" data-group="primary" data-tab="description">
+      {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+    </div>
+  </section>
+</form>
