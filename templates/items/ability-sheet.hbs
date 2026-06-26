@@ -1,0 +1,59 @@
+<form class="ikrpg-item-sheet {{cssClass}}" autocomplete="off">
+  <!-- Cabeçalho da Ficha -->
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'IKRPG.Ability.Name'}}" required />
+      </h1>
+      <div class="item-meta">
+        <span class="item-type-badge">{{localize "IKRPG.Ability.Badge"}}</span>
+        <div class="item-identifier-group">
+          <label>{{localize "IKRPG.Ability.Identifier"}}:</label>
+          <input name="system.identifier" type="text" value="{{system.identifier}}" placeholder="ex: sentry" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Abas de Navegação -->
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="properties"><i class="fas fa-sliders-h"></i> Propriedades</a>
+    <a class="item" data-tab="description"><i class="fas fa-file-alt"></i> {{localize "IKRPG.Ability.Description"}}</a>
+  </nav>
+
+  <!-- Corpo da Ficha -->
+  <section class="sheet-body">
+    <!-- Aba de Propriedades Mecânicas -->
+    <div class="tab properties active" data-group="primary" data-tab="properties">
+      <div class="properties-grid">
+        <!-- Tipo de Habilidade -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-cog"></i> {{localize "IKRPG.Ability.Type"}}</span>
+          <div class="form-fields">
+            <select name="system.abilityType">
+              {{#select system.abilityType}}
+              {{#each abilityTypes}}
+              <option value="{{@key}}">{{this}}</option>
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+        </div>
+
+        <!-- Pré-requisitos -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-key"></i> {{localize "IKRPG.Ability.Prerequisite"}}</span>
+          <div class="form-fields">
+            <input name="system.prerequisite" type="text" value="{{system.prerequisite}}" placeholder="ex: ARC 4, DET 5" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aba de Descrição / Regras -->
+    <div class="tab description" data-group="primary" data-tab="description">
+      {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+    </div>
+  </section>
+</form>

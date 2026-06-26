@@ -21,5 +21,12 @@
       "path": "lang/pt-br.json"
     }
   ],
+  "documentTypes": {
+    "Item": [
+      "meleeWeapon",
+      "rangedWeapon",
+      "ability"
+    ]
+  },
   "license": "MIT"
 }

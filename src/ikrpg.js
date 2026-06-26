@@ -3,6 +3,8 @@ import { RangedWeaponData } from "./items/ranged-weapon-data.js";
 import { IKRPGRangedWeaponSheet } from "./sheets/ranged-weapon-sheet.js";
 import { MeleeWeaponData } from "./items/melee-weapon-data.js";
 import { IKRPGMeleeWeaponSheet } from "./sheets/melee-weapon-sheet.js";
+import { AbilityData } from "./items/ability-data.js";
+import { IKRPGAbilitySheet } from "./sheets/ability-sheet.js";
 
 // Helper para obter os idiomas disponíveis no manifesto do sistema
 function getAvailableLanguages() {
@@ -53,6 +55,7 @@ Hooks.once("init", () => {
   CONFIG.Item.dataModels = CONFIG.Item.dataModels || {};
   CONFIG.Item.dataModels.rangedWeapon = RangedWeaponData;
   CONFIG.Item.dataModels.meleeWeapon = MeleeWeaponData;
+  CONFIG.Item.dataModels.ability = AbilityData;
 
   // Registrar Fichas de Itens
   Items.registerSheet("ikrpg", IKRPGRangedWeaponSheet, {
@@ -65,6 +68,12 @@ Hooks.once("init", () => {
     types: ["meleeWeapon"],
     makeDefault: true,
     label: "IKRPG.Weapon.MeleeSheet"
+  });
+
+  Items.registerSheet("ikrpg", IKRPGAbilitySheet, {
+    types: ["ability"],
+    makeDefault: true,
+    label: "IKRPG.Ability.SheetName"
   });
 
   const langs = getAvailableLanguages();

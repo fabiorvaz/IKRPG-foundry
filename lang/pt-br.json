@@ -52,6 +52,19 @@
       "Equipped": "Equipado",
       "Description": "Descrição"
     },
+    "Ability": {
+      "Name": "Nome da Habilidade",
+      "Identifier": "Identificador",
+      "Type": "Tipo de Habilidade",
+      "TypeArchetype": "Habilidade de Arquétipo",
+      "TypeCareer": "Habilidade de Carreira",
+      "TypeGeneral": "Habilidade Geral",
+      "TypeOther": "Outra Habilidade",
+      "Prerequisite": "Pré-requisito",
+      "Badge": "Habilidade",
+      "SheetName": "Ficha de Habilidade",
+      "Description": "Descrição"
+    },
     "Settings": {
       "DefaultLanguage": {
         "Name": "Idioma Padrão do Sistema",
