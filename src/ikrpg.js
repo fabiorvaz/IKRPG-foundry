@@ -15,6 +15,10 @@ import { MiscellaneousData } from "./items/miscellaneous-data.js";
 import { IKRPGMiscellaneousSheet } from "./sheets/miscellaneous-sheet.js";
 import { ArchetypeData } from "./items/archetype-data.js";
 import { IKRPGArchetypeSheet } from "./sheets/archetype-sheet.js";
+import { RaceData } from "./items/race-data.js";
+import { IKRPGRaceSheet } from "./sheets/race-sheet.js";
+import { CareerData } from "./items/career-data.js";
+import { IKRPGCareerSheet } from "./sheets/career-sheet.js";
 
 // Helper para obter os idiomas disponíveis no manifesto do sistema
 function getAvailableLanguages() {
@@ -71,6 +75,8 @@ Hooks.once("init", () => {
   CONFIG.Item.dataModels.consumable = ConsumableData;
   CONFIG.Item.dataModels.miscellaneous = MiscellaneousData;
   CONFIG.Item.dataModels.archetype = ArchetypeData;
+  CONFIG.Item.dataModels.race = RaceData;
+  CONFIG.Item.dataModels.career = CareerData;
 
   // Registrar Fichas de Itens
   Items.registerSheet("ikrpg", IKRPGRangedWeaponSheet, {
@@ -119,6 +125,18 @@ Hooks.once("init", () => {
     types: ["archetype"],
     makeDefault: true,
     label: "IKRPG.Archetype.SheetName"
+  });
+
+  Items.registerSheet("ikrpg", IKRPGRaceSheet, {
+    types: ["race"],
+    makeDefault: true,
+    label: "IKRPG.Race.SheetName"
+  });
+
+  Items.registerSheet("ikrpg", IKRPGCareerSheet, {
+    types: ["career"],
+    makeDefault: true,
+    label: "IKRPG.Career.SheetName"
   });
 
   const langs = getAvailableLanguages();

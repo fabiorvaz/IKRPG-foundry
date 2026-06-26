@@ -30,7 +30,9 @@
       "armor",
       "consumable",
       "miscellaneous",
-      "archetype"
+      "archetype",
+      "race",
+      "career"
     ]
   },
   "license": "MIT"

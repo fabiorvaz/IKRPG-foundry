@@ -1,0 +1,241 @@
+<form class="ikrpg-item-sheet {{cssClass}}" autocomplete="off">
+  <!-- Cabeçalho da Ficha -->
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'IKRPG.Common.Name'}}" required />
+      </h1>
+      <div class="item-meta">
+        <span class="item-type-badge">{{localize "IKRPG.Race.Badge"}}</span>
+        <div class="item-identifier-group">
+          <label>{{localize "IKRPG.Common.Identifier"}}:</label>
+          <input name="system.identifier" type="text" value="{{system.identifier}}" placeholder="ex: human" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Abas de Navegação -->
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="properties"><i class="fas fa-sliders-h"></i> {{localize "IKRPG.Common.Properties"}}</a>
+    <a class="item" data-tab="description"><i class="fas fa-file-alt"></i> {{localize "IKRPG.Common.Description"}}</a>
+  </nav>
+
+  <!-- Corpo da Ficha -->
+  <section class="sheet-body">
+    <!-- Aba de Propriedades Mecânicas -->
+    <div class="tab properties active" data-group="primary" data-tab="properties">
+      <div class="properties-grid">
+        <!-- Tamanho da Raça -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-arrows-alt"></i> {{localize "IKRPG.Race.Size"}}</span>
+          <div class="form-fields">
+            <select name="system.size">
+              {{#select system.size}}
+              {{#each sizes}}
+              <option value="{{@key}}">{{this}}</option>
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+        </div>
+
+        <!-- Permitir Arcana -->
+        <div class="form-group checkbox-group">
+          <span class="form-label"><i class="fas fa-magic"></i> {{localize "IKRPG.Race.AllowArcane"}}</span>
+          <div class="form-fields">
+            <input name="system.allowArcane" type="checkbox" {{checked system.allowArcane}} />
+          </div>
+        </div>
+
+        <!-- Tabela de Limites e Valores de Atributos -->
+        <div class="form-group stats-table-group" style="display: flex; flex-direction: column; align-items: stretch; border-bottom: none; padding-top: 10px;">
+          <span class="form-label" style="margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 5px; width: 100%;">
+            <i class="fas fa-chart-bar"></i> {{localize "IKRPG.Race.BaseStats"}} / Atributos Máximos
+          </span>
+          <table class="race-stats-table" style="width: 100%; border-collapse: collapse; margin-top: 6px;">
+            <thead>
+              <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: var(--ikrpg-accent-gold);">
+                <th style="text-align: left; padding: 6px 4px; text-transform: uppercase;">Atributo</th>
+                <th style="text-align: center; padding: 6px 4px; width: 75px; text-transform: uppercase;">{{localize "IKRPG.Race.BaseStats"}}</th>
+                <th style="text-align: center; padding: 6px 4px; width: 85px; text-transform: uppercase;">{{localize "IKRPG.Race.MaxStatsHeroic"}}</th>
+                <th style="text-align: center; padding: 6px 4px; width: 85px; text-transform: uppercase;">{{localize "IKRPG.Race.MaxStatsVeteran"}}</th>
+                <th style="text-align: center; padding: 6px 4px; width: 85px; text-transform: uppercase;">{{localize "IKRPG.Race.MaxStatsEpic"}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <!-- Physique -->
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Physique"}} (FÍS)</td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.baseStats.physique" type="number" value="{{system.baseStats.physique}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.heroic.physique" type="number" value="{{system.maxStats.heroic.physique}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.veteran.physique" type="number" value="{{system.maxStats.veteran.physique}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.epic.physique" type="number" value="{{system.maxStats.epic.physique}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+              </tr>
+              <!-- Strength -->
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Strength"}} (FOR)</td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.baseStats.strength" type="number" value="{{system.baseStats.strength}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.heroic.strength" type="number" value="{{system.maxStats.heroic.strength}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.veteran.strength" type="number" value="{{system.maxStats.veteran.strength}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.epic.strength" type="number" value="{{system.maxStats.epic.strength}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+              </tr>
+              <!-- Speed -->
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Speed"}} (VEL)</td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.baseStats.speed" type="number" value="{{system.baseStats.speed}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.heroic.speed" type="number" value="{{system.maxStats.heroic.speed}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.veteran.speed" type="number" value="{{system.maxStats.veteran.speed}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.epic.speed" type="number" value="{{system.maxStats.epic.speed}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+              </tr>
+              <!-- Agility -->
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Agility"}} (AGI)</td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.baseStats.agility" type="number" value="{{system.baseStats.agility}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.heroic.agility" type="number" value="{{system.maxStats.heroic.agility}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.veteran.agility" type="number" value="{{system.maxStats.veteran.agility}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.epic.agility" type="number" value="{{system.maxStats.epic.agility}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+              </tr>
+              <!-- Dexterity -->
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Dexterity"}} (DES)</td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.baseStats.dexterity" type="number" value="{{system.baseStats.dexterity}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.heroic.dexterity" type="number" value="{{system.maxStats.heroic.dexterity}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.veteran.dexterity" type="number" value="{{system.maxStats.veteran.dexterity}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.epic.dexterity" type="number" value="{{system.maxStats.epic.dexterity}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+              </tr>
+              <!-- Mastery -->
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Mastery"}} (MAE)</td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.baseStats.mastery" type="number" value="{{system.baseStats.mastery}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.heroic.mastery" type="number" value="{{system.maxStats.heroic.mastery}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.veteran.mastery" type="number" value="{{system.maxStats.veteran.mastery}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.epic.mastery" type="number" value="{{system.maxStats.epic.mastery}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+              </tr>
+              <!-- Intellect -->
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Intellect"}} (INT)</td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.baseStats.intellect" type="number" value="{{system.baseStats.intellect}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.heroic.intellect" type="number" value="{{system.maxStats.heroic.intellect}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.veteran.intellect" type="number" value="{{system.maxStats.veteran.intellect}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.epic.intellect" type="number" value="{{system.maxStats.epic.intellect}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+              </tr>
+              <!-- Arcana -->
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Arcana"}} (ARC)</td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.baseStats.arcana" type="number" value="{{system.baseStats.arcana}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.heroic.arcana" type="number" value="{{system.maxStats.heroic.arcana}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.veteran.arcana" type="number" value="{{system.maxStats.veteran.arcana}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.epic.arcana" type="number" value="{{system.maxStats.epic.arcana}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+              </tr>
+              <!-- Perception -->
+              <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Perception"}} (PER)</td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.baseStats.perception" type="number" value="{{system.baseStats.perception}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.heroic.perception" type="number" value="{{system.maxStats.heroic.perception}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.veteran.perception" type="number" value="{{system.maxStats.veteran.perception}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+                <td style="padding: 4px; text-align: center;">
+                  <input name="system.maxStats.epic.perception" type="number" value="{{system.maxStats.epic.perception}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Habilidades Raciais (Identificadores) -->
+        <div class="form-group abilities-list-group">
+          <span class="form-label"><i class="fas fa-list"></i> {{localize "IKRPG.Race.Abilities"}}</span>
+          <div class="form-fields" style="display: flex; flex-direction: column; gap: 5px;">
+            {{#each system.abilities}}
+            <div class="ability-row" style="display: flex; gap: 5px; align-items: center; width: 100%;">
+              <input name="system.abilities.{{@index}}" type="text" value="{{this}}" placeholder="ex: night-vision" style="flex: 1;" />
+              <a class="delete-ability-btn" data-index="{{@index}}" title="{{localize 'IKRPG.Race.DeleteAbility'}}" style="cursor: pointer; padding: 5px; color: #ff5555;">
+                <i class="fas fa-trash"></i>
+              </a>
+            </div>
+            {{/each}}
+            <a class="add-ability-btn" style="margin-top: 5px; cursor: pointer; color: #008800; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">
+              <i class="fas fa-plus"></i> {{localize "IKRPG.Race.AddAbility"}}
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aba de Descrição / Notas -->
+    <div class="tab description" data-group="primary" data-tab="description">
+      {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+    </div>
+  </section>
+</form>

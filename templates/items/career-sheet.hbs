@@ -1,0 +1,382 @@
+<form class="ikrpg-item-sheet {{cssClass}}" autocomplete="off">
+  <!-- Cabeçalho da Ficha -->
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'IKRPG.Common.Name'}}" required />
+      </h1>
+      <div class="item-meta">
+        <span class="item-type-badge">{{localize "IKRPG.Career.Badge"}}</span>
+        <div class="item-identifier-group">
+          <label>{{localize "IKRPG.Common.Identifier"}}:</label>
+          <input name="system.identifier" type="text" value="{{system.identifier}}" placeholder="ex: soldier" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Abas de Navegação -->
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="general"><i class="fas fa-sliders-h"></i> {{localize "IKRPG.Career.TabGeneral"}}</a>
+    <a class="item" data-tab="skills"><i class="fas fa-book"></i> {{localize "IKRPG.Career.TabSkills"}}</a>
+    <a class="item" data-tab="abilities"><i class="fas fa-list"></i> {{localize "IKRPG.Career.TabAbilities"}}</a>
+    <a class="item" data-tab="items"><i class="fas fa-suitcase"></i> {{localize "IKRPG.Career.TabItems"}}</a>
+    {{#if system.hasSpells}}
+    <a class="item" data-tab="spells"><i class="fas fa-magic"></i> {{localize "IKRPG.Career.TabSpells"}}</a>
+    {{/if}}
+  </nav>
+
+  <!-- Corpo da Ficha -->
+  <section class="sheet-body">
+    <!-- Aba Geral -->
+    <div class="tab general active" data-group="primary" data-tab="general">
+      <div class="properties-grid">
+        <!-- Capital Inicial -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-coins"></i> {{localize "IKRPG.Career.StartingCapital"}}</span>
+          <div class="form-fields">
+            <input name="system.startingCapital" type="text" value="{{system.startingCapital}}" placeholder="ex: 100 PO ou 2d6 x 10 PO" />
+          </div>
+        </div>
+
+        <!-- Possui Magia -->
+        <div class="form-group checkbox-group">
+          <span class="form-label"><i class="fas fa-magic"></i> {{localize "IKRPG.Career.HasSpells"}}</span>
+          <div class="form-fields">
+            <input name="system.hasSpells" type="checkbox" {{checked system.hasSpells}} />
+          </div>
+        </div>
+      </div>
+
+      <!-- Editor de Descrição -->
+      <div class="description-section" style="margin-top: 15px;">
+        <span class="form-label-header" style="font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; padding-bottom: 5px; margin-bottom: 8px; color: var(--ikrpg-accent-gold, #ffaa00);">
+          <i class="fas fa-file-alt"></i> {{localize "IKRPG.Career.Description"}}
+        </span>
+        <div class="editor-container" style="min-height: 120px;">
+          {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+        </div>
+      </div>
+
+      <!-- Editor de Jogando com -->
+      <div class="playstyle-section" style="margin-top: 15px;">
+        <span class="form-label-header" style="font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; padding-bottom: 5px; margin-bottom: 8px; color: var(--ikrpg-accent-gold, #ffaa00);">
+          <i class="fas fa-gamepad"></i> {{localize "IKRPG.Career.Playstyle"}}
+        </span>
+        <div class="editor-container" style="min-height: 120px;">
+          {{editor system.playstyle target="system.playstyle" button=true owner=owner editable=editable}}
+        </div>
+      </div>
+    </div>
+
+    <!-- Aba de Perícias -->
+    <div class="tab skills" data-group="primary" data-tab="skills">
+      <!-- Perícias Militares -->
+      <div class="skills-section" style="margin-bottom: 20px;">
+        <span class="form-label-header" style="font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; padding-bottom: 5px; margin-bottom: 8px; color: var(--ikrpg-accent-gold, #ffaa00);">
+          <i class="fas fa-shield-alt"></i> {{localize "IKRPG.Career.MilitarySkills"}}
+        </span>
+        <table class="career-skills-table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem;">
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Identifier"}}</th>
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Name"}}</th>
+              <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelInitial"}}</th>
+              <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelMax"}}</th>
+              <th style="text-align: center; padding: 4px; width: 50px;">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each system.militarySkills}}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 4px;">
+                <input name="system.militarySkills.{{@index}}.id" type="text" value="{{this.id}}" placeholder="ex: hand-weapon" />
+              </td>
+              <td style="padding: 4px;">
+                <input name="system.militarySkills.{{@index}}.name" type="text" value="{{this.name}}" placeholder="ex: Arma de Combate" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <input name="system.militarySkills.{{@index}}.levelInitial" type="number" value="{{this.levelInitial}}" style="text-align: center; width: 55px;" min="0" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <input name="system.militarySkills.{{@index}}.levelMax" type="number" value="{{this.levelMax}}" style="text-align: center; width: 55px;" min="0" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <a class="delete-military-skill-btn" data-index="{{@index}}" title="{{localize 'IKRPG.Career.DeleteSkill'}}" style="cursor: pointer; color: #ff5555;">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <a class="add-military-skill-btn" style="margin-top: 8px; cursor: pointer; color: #00aa00; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">
+          <i class="fas fa-plus"></i> {{localize "IKRPG.Career.AddSkill"}}
+        </a>
+      </div>
+
+      <!-- Perícias Sociais -->
+      <div class="skills-section" style="margin-bottom: 20px;">
+        <span class="form-label-header" style="font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; padding-bottom: 5px; margin-bottom: 8px; color: var(--ikrpg-accent-gold, #ffaa00);">
+          <i class="fas fa-users"></i> {{localize "IKRPG.Career.SocialSkills"}}
+        </span>
+        <table class="career-skills-table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem;">
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Identifier"}}</th>
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Name"}}</th>
+              <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelInitial"}}</th>
+              <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelMax"}}</th>
+              <th style="text-align: center; padding: 4px; width: 50px;">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each system.socialSkills}}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 4px;">
+                <input name="system.socialSkills.{{@index}}.id" type="text" value="{{this.id}}" placeholder="ex: negotiation" />
+              </td>
+              <td style="padding: 4px;">
+                <input name="system.socialSkills.{{@index}}.name" type="text" value="{{this.name}}" placeholder="ex: Negociação" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <input name="system.socialSkills.{{@index}}.levelInitial" type="number" value="{{this.levelInitial}}" style="text-align: center; width: 55px;" min="0" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <input name="system.socialSkills.{{@index}}.levelMax" type="number" value="{{this.levelMax}}" style="text-align: center; width: 55px;" min="0" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <a class="delete-social-skill-btn" data-index="{{@index}}" title="{{localize 'IKRPG.Career.DeleteSkill'}}" style="cursor: pointer; color: #ff5555;">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <a class="add-social-skill-btn" style="margin-top: 8px; cursor: pointer; color: #00aa00; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">
+          <i class="fas fa-plus"></i> {{localize "IKRPG.Career.AddSkill"}}
+        </a>
+      </div>
+
+      <!-- Perícias da Carreira -->
+      <div class="skills-section" style="margin-bottom: 20px;">
+        <span class="form-label-header" style="font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; padding-bottom: 5px; margin-bottom: 8px; color: var(--ikrpg-accent-gold, #ffaa00);">
+          <i class="fas fa-cogs"></i> {{localize "IKRPG.Career.CareerSkills"}}
+        </span>
+        <table class="career-skills-table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem;">
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Identifier"}}</th>
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Name"}}</th>
+              <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelInitial"}}</th>
+              <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelMax"}}</th>
+              <th style="text-align: center; padding: 4px; width: 50px;">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each system.careerSkills}}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 4px;">
+                <input name="system.careerSkills.{{@index}}.id" type="text" value="{{this.id}}" placeholder="ex: craft-metalworking" />
+              </td>
+              <td style="padding: 4px;">
+                <input name="system.careerSkills.{{@index}}.name" type="text" value="{{this.name}}" placeholder="ex: Ofício (Metalurgia)" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <input name="system.careerSkills.{{@index}}.levelInitial" type="number" value="{{this.levelInitial}}" style="text-align: center; width: 55px;" min="0" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <input name="system.careerSkills.{{@index}}.levelMax" type="number" value="{{this.levelMax}}" style="text-align: center; width: 55px;" min="0" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <a class="delete-career-skill-btn" data-index="{{@index}}" title="{{localize 'IKRPG.Career.DeleteSkill'}}" style="cursor: pointer; color: #ff5555;">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <a class="add-career-skill-btn" style="margin-top: 8px; cursor: pointer; color: #00aa00; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">
+          <i class="fas fa-plus"></i> {{localize "IKRPG.Career.AddSkill"}}
+        </a>
+      </div>
+    </div>
+
+    <!-- Aba de Habilidades -->
+    <div class="tab abilities" data-group="primary" data-tab="abilities">
+      <!-- Habilidades Iniciais -->
+      <div class="abilities-section" style="margin-bottom: 20px;">
+        <span class="form-label-header" style="font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; padding-bottom: 5px; margin-bottom: 8px; color: var(--ikrpg-accent-gold, #ffaa00);">
+          <i class="fas fa-star"></i> {{localize "IKRPG.Career.StartingAbilities"}}
+        </span>
+        <table class="career-abilities-table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem;">
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Identifier"}}</th>
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Name"}}</th>
+              <th style="text-align: center; padding: 4px; width: 50px;">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each system.startingAbilities}}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 4px;">
+                <input name="system.startingAbilities.{{@index}}.id" type="text" value="{{this.id}}" placeholder="ex: fast-draw" />
+              </td>
+              <td style="padding: 4px;">
+                <input name="system.startingAbilities.{{@index}}.name" type="text" value="{{this.name}}" placeholder="ex: Saque Rápido" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <a class="delete-starting-ability-btn" data-index="{{@index}}" title="{{localize 'IKRPG.Career.DeleteAbility'}}" style="cursor: pointer; color: #ff5555;">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <a class="add-starting-ability-btn" style="margin-top: 8px; cursor: pointer; color: #00aa00; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">
+          <i class="fas fa-plus"></i> {{localize "IKRPG.Career.AddAbility"}}
+        </a>
+      </div>
+
+      <!-- Habilidades da Carreira -->
+      <div class="abilities-section" style="margin-bottom: 20px;">
+        <span class="form-label-header" style="font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; padding-bottom: 5px; margin-bottom: 8px; color: var(--ikrpg-accent-gold, #ffaa00);">
+          <i class="fas fa-list-ul"></i> {{localize "IKRPG.Career.CareerAbilities"}}
+        </span>
+        <table class="career-abilities-table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem;">
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Identifier"}}</th>
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Name"}}</th>
+              <th style="text-align: center; padding: 4px; width: 50px;">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each system.careerAbilities}}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 4px;">
+                <input name="system.careerAbilities.{{@index}}.id" type="text" value="{{this.id}}" placeholder="ex: cleave" />
+              </td>
+              <td style="padding: 4px;">
+                <input name="system.careerAbilities.{{@index}}.name" type="text" value="{{this.name}}" placeholder="ex: Traspassar" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <a class="delete-career-ability-btn" data-index="{{@index}}" title="{{localize 'IKRPG.Career.DeleteAbility'}}" style="cursor: pointer; color: #ff5555;">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <a class="add-career-ability-btn" style="margin-top: 8px; cursor: pointer; color: #00aa00; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">
+          <i class="fas fa-plus"></i> {{localize "IKRPG.Career.AddAbility"}}
+        </a>
+      </div>
+    </div>
+
+    <!-- Aba de Itens -->
+    <div class="tab items" data-group="primary" data-tab="items">
+      <div class="items-section">
+        <span class="form-label-header" style="font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; padding-bottom: 5px; margin-bottom: 8px; color: var(--ikrpg-accent-gold, #ffaa00);">
+          <i class="fas fa-suitcase"></i> {{localize "IKRPG.Career.StartingItems"}}
+        </span>
+        <div class="starting-items-list" style="display: flex; flex-direction: column; gap: 5px;">
+          {{#each system.startingItems}}
+          <div class="item-row" style="display: flex; gap: 5px; align-items: center; width: 100%;">
+            <input name="system.startingItems.{{@index}}" type="text" value="{{this}}" placeholder="ex: Espada militar ou Pistola com pólvora e munição" style="flex: 1;" />
+            <a class="delete-starting-item-btn" data-index="{{@index}}" title="{{localize 'IKRPG.Career.DeleteItem'}}" style="cursor: pointer; padding: 5px; color: #ff5555;">
+              <i class="fas fa-trash"></i>
+            </a>
+          </div>
+          {{/each}}
+          <a class="add-starting-item-btn" style="margin-top: 5px; cursor: pointer; color: #00aa00; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">
+            <i class="fas fa-plus"></i> {{localize "IKRPG.Career.AddItem"}}
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aba de Magias -->
+    {{#if system.hasSpells}}
+    <div class="tab spells" data-group="primary" data-tab="spells">
+      <!-- Magias Iniciais -->
+      <div class="spells-section" style="margin-bottom: 20px;">
+        <span class="form-label-header" style="font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; padding-bottom: 5px; margin-bottom: 8px; color: var(--ikrpg-accent-gold, #ffaa00);">
+          <i class="fas fa-magic"></i> {{localize "IKRPG.Career.StartingSpells"}}
+        </span>
+        <table class="career-spells-table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem;">
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Identifier"}}</th>
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Name"}}</th>
+              <th style="text-align: center; padding: 4px; width: 50px;">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each system.startingSpells}}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 4px;">
+                <input name="system.startingSpells.{{@index}}.id" type="text" value="{{this.id}}" placeholder="ex: fire-bolt" />
+              </td>
+              <td style="padding: 4px;">
+                <input name="system.startingSpells.{{@index}}.name" type="text" value="{{this.name}}" placeholder="ex: Dardo de Fogo" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <a class="delete-starting-spell-btn" data-index="{{@index}}" title="{{localize 'IKRPG.Career.DeleteSpell'}}" style="cursor: pointer; color: #ff5555;">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <a class="add-starting-spell-btn" style="margin-top: 8px; cursor: pointer; color: #00aa00; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">
+          <i class="fas fa-plus"></i> {{localize "IKRPG.Career.AddSpell"}}
+        </a>
+      </div>
+
+      <!-- Magias da Carreira -->
+      <div class="spells-section" style="margin-bottom: 20px;">
+        <span class="form-label-header" style="font-weight: bold; border-bottom: 1px solid rgba(255,255,255,0.1); display: block; padding-bottom: 5px; margin-bottom: 8px; color: var(--ikrpg-accent-gold, #ffaa00);">
+          <i class="fas fa-scroll"></i> {{localize "IKRPG.Career.CareerSpells"}}
+        </span>
+        <table class="career-spells-table" style="width: 100%; border-collapse: collapse;">
+          <thead>
+            <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem;">
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Identifier"}}</th>
+              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Name"}}</th>
+              <th style="text-align: center; padding: 4px; width: 50px;">Ação</th>
+            </tr>
+          </thead>
+          <tbody>
+            {{#each system.careerSpells}}
+            <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
+              <td style="padding: 4px;">
+                <input name="system.careerSpells.{{@index}}.id" type="text" value="{{this.id}}" placeholder="ex: teleport" />
+              </td>
+              <td style="padding: 4px;">
+                <input name="system.careerSpells.{{@index}}.name" type="text" value="{{this.name}}" placeholder="ex: Teleporte" />
+              </td>
+              <td style="padding: 4px; text-align: center;">
+                <a class="delete-career-spell-btn" data-index="{{@index}}" title="{{localize 'IKRPG.Career.DeleteSpell'}}" style="cursor: pointer; color: #ff5555;">
+                  <i class="fas fa-trash"></i>
+                </a>
+              </td>
+            </tr>
+            {{/each}}
+          </tbody>
+        </table>
+        <a class="add-career-spell-btn" style="margin-top: 8px; cursor: pointer; color: #00aa00; font-weight: bold; display: inline-flex; align-items: center; gap: 5px;">
+          <i class="fas fa-plus"></i> {{localize "IKRPG.Career.AddSpell"}}
+        </a>
+      </div>
+    </div>
+    {{/if}}
+  </section>
+</form>
