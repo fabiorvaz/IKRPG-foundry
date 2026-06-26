@@ -77,6 +77,28 @@
       "SheetName": "Ficha de Magia",
       "Description": "Descrição"
     },
+    "Armor": {
+      "Badge": "Armadura/Escudo",
+      "SheetName": "Ficha de Armadura",
+      "Type": "Tipo",
+      "TypeArmor": "Armadura",
+      "TypeShield": "Escudo",
+      "Variant": "Variante",
+      "VariantLight": "Leve",
+      "VariantMedium": "Média",
+      "VariantHeavy": "Pesada",
+      "VariantNone": "Nenhuma (Escudo)",
+      "ArmorModifier": "Modificador de Armadura",
+      "DefenseModifier": "Modificador de Defesa",
+      "SpeedModifier": "Modificador de Velocidade",
+      "Description": "Descrição"
+    },
+    "Common": {
+      "Identifier": "Identificador",
+      "Properties": "Propriedades",
+      "Description": "Descrição",
+      "Name": "Nome"
+    },
     "Settings": {
       "DefaultLanguage": {
         "Name": "Idioma Padrão do Sistema",

@@ -26,7 +26,8 @@
       "meleeWeapon",
       "rangedWeapon",
       "ability",
-      "spell"
+      "spell",
+      "armor"
     ]
   },
   "license": "MIT"

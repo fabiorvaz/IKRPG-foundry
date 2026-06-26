@@ -1,0 +1,89 @@
+<form class="ikrpg-item-sheet {{cssClass}}" autocomplete="off">
+  <!-- Sheet Header -->
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'IKRPG.Weapon.Name'}}" required />
+      </h1>
+      <div class="item-meta">
+        <span class="item-type-badge">{{localize "IKRPG.Armor.Badge"}}</span>
+        <div class="item-identifier-group">
+          <label>{{localize "IKRPG.Common.Identifier"}}:</label>
+          <input name="system.identifier" type="text" value="{{system.identifier}}" placeholder="ex: unique-id" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="properties"><i class="fas fa-sliders-h"></i> {{localize "IKRPG.Common.Properties"}}</a>
+    <a class="item" data-tab="description"><i class="fas fa-file-alt"></i> {{localize "IKRPG.Common.Description"}}</a>
+  </nav>
+
+  <!-- Sheet Body -->
+  <section class="sheet-body">
+    <!-- Properties Tab -->
+    <div class="tab properties active" data-group="primary" data-tab="properties">
+      <div class="properties-grid">
+        <!-- Armor Type -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-shield-alt"></i> {{localize "IKRPG.Armor.Type"}}</span>
+          <div class="form-fields">
+            <select name="system.armorType">
+              {{#select system.armorType}}
+              {{#each armorTypes}}
+              <option value="{{@key}}">{{this}}</option>
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+        </div>
+
+        <!-- Variant -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-tshirt"></i> {{localize "IKRPG.Armor.Variant"}}</span>
+          <div class="form-fields">
+            <select name="system.variant">
+              {{#select system.variant}}
+              {{#each variants}}
+              <option value="{{@key}}">{{this}}</option>
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+        </div>
+
+        <!-- Armor Modifier -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-shield-virus"></i> {{localize "IKRPG.Armor.ArmorModifier"}}</span>
+          <div class="form-fields">
+            <input name="system.armorModifier" type="number" value="{{system.armorModifier}}" />
+          </div>
+        </div>
+
+        <!-- Defense Modifier -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-user-shield"></i> {{localize "IKRPG.Armor.DefenseModifier"}}</span>
+          <div class="form-fields">
+            <input name="system.defenseModifier" type="number" value="{{system.defenseModifier}}" />
+          </div>
+        </div>
+
+        <!-- Speed Modifier -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-running"></i> {{localize "IKRPG.Armor.SpeedModifier"}}</span>
+          <div class="form-fields">
+            <input name="system.speedModifier" type="number" value="{{system.speedModifier}}" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description Tab -->
+    <div class="tab description" data-group="primary" data-tab="description">
+      {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+    </div>
+  </section>
+</form>
