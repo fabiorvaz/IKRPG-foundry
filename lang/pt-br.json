@@ -65,6 +65,18 @@
       "SheetName": "Ficha de Habilidade",
       "Description": "Descrição"
     },
+    "Spell": {
+      "Name": "Nome da Magia",
+      "Identifier": "Identificador",
+      "Cost": "Custo",
+      "Range": "Alcance",
+      "Power": "Poder",
+      "Offensive": "Ofensiva?",
+      "Maintenance": "Manutenção?",
+      "Badge": "Magia",
+      "SheetName": "Ficha de Magia",
+      "Description": "Descrição"
+    },
     "Settings": {
       "DefaultLanguage": {
         "Name": "Idioma Padrão do Sistema",

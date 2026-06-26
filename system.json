@@ -25,7 +25,8 @@
     "Item": [
       "meleeWeapon",
       "rangedWeapon",
-      "ability"
+      "ability",
+      "spell"
     ]
   },
   "license": "MIT"

@@ -1,0 +1,77 @@
+<form class="ikrpg-item-sheet {{cssClass}}" autocomplete="off">
+  <!-- Cabeçalho da Ficha -->
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'IKRPG.Spell.Name'}}" required />
+      </h1>
+      <div class="item-meta">
+        <span class="item-type-badge">{{localize "IKRPG.Spell.Badge"}}</span>
+        <div class="item-identifier-group">
+          <label>{{localize "IKRPG.Spell.Identifier"}}:</label>
+          <input name="system.identifier" type="text" value="{{system.identifier}}" placeholder="ex: lightning-bolt" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Abas de Navegação -->
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="properties"><i class="fas fa-sliders-h"></i> Propriedades</a>
+    <a class="item" data-tab="description"><i class="fas fa-file-alt"></i> {{localize "IKRPG.Spell.Description"}}</a>
+  </nav>
+
+  <!-- Corpo da Ficha -->
+  <section class="sheet-body">
+    <!-- Aba de Propriedades Mecânicas -->
+    <div class="tab properties active" data-group="primary" data-tab="properties">
+      <div class="properties-grid">
+        <!-- Custo -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-star"></i> {{localize "IKRPG.Spell.Cost"}}</span>
+          <div class="form-fields">
+            <input name="system.cost" type="number" value="{{system.cost}}" min="0" />
+          </div>
+        </div>
+
+        <!-- Alcance -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-arrows-alt-h"></i> {{localize "IKRPG.Spell.Range"}}</span>
+          <div class="form-fields">
+            <input name="system.range" type="text" value="{{system.range}}" placeholder="ex: 10, Self, CTRL" />
+          </div>
+        </div>
+
+        <!-- Poder -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-fist-raised"></i> {{localize "IKRPG.Spell.Power"}}</span>
+          <div class="form-fields">
+            <input name="system.power" type="number" value="{{system.power}}" min="0" />
+          </div>
+        </div>
+
+        <!-- Ofensiva? -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-bolt"></i> {{localize "IKRPG.Spell.Offensive"}}</span>
+          <div class="form-fields">
+            <input name="system.offensive" type="checkbox" {{checked system.offensive}} />
+          </div>
+        </div>
+
+        <!-- Manutenção? -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-sync-alt"></i> {{localize "IKRPG.Spell.Maintenance"}}</span>
+          <div class="form-fields">
+            <input name="system.maintenance" type="checkbox" {{checked system.maintenance}} />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Aba de Descrição / Efeitos -->
+    <div class="tab description" data-group="primary" data-tab="description">
+      {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+    </div>
+  </section>
+</form>
