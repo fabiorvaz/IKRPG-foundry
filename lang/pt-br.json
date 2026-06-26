@@ -110,6 +110,19 @@
       "Price": "Preço (PO)",
       "Weight": "Peso (Kg)"
     },
+    "Miscellaneous": {
+      "Badge": "Miscelânea",
+      "SheetName": "Ficha de Miscelânea",
+      "Type": "Tipo de Item",
+      "TypeGeneral": "Geral",
+      "TypeTool": "Ferramenta",
+      "TypeValuable": "Objeto de Valor",
+      "TypeContainer": "Recipiente",
+      "TypeOther": "Outro",
+      "Quantity": "Quantidade",
+      "Price": "Preço (PO)",
+      "Weight": "Peso (Kg)"
+    },
     "Common": {
       "Identifier": "Identificador",
       "Properties": "Propriedades",

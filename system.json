@@ -28,7 +28,8 @@
       "ability",
       "spell",
       "armor",
-      "consumable"
+      "consumable",
+      "miscellaneous"
     ]
   },
   "license": "MIT"
