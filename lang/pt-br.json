@@ -159,6 +159,9 @@
       "StartingItems": "Equipamento Inicial",
       "LevelInitial": "Nível Inicial",
       "LevelMax": "Nível Máx",
+      "Skill": "Perícia",
+      "SelectSkill": "Selecionar Perícia...",
+      "UnknownSkill": "Desconhecida",
       "AddSkill": "Adicionar Perícia",
       "DeleteSkill": "Remover Perícia",
       "AddAbility": "Adicionar Habilidade",
@@ -186,6 +189,66 @@
       "Properties": "Propriedades",
       "Description": "Descrição",
       "Name": "Nome"
+    },
+    "Character": {
+      "Badge": "Personagem do Jogador",
+      "SheetName": "Ficha do Personagem",
+      "TabAttributes": "Atributos & Perícias",
+      "TabInventory": "Inventário",
+      "TabAbilities": "Habilidades",
+      "TabSpells": "Magias",
+      "TabMiscellaneous": "Geral & Biografia",
+      "TabProgression": "Experiência & Evolução",
+      "XP": "Experiência Atual",
+      "Tier": "Categoria de Evolução",
+      "TierHeroic": "Heróico",
+      "TierVeteran": "Veterano",
+      "TierEpic": "Épico",
+      "FeatPoints": "Pontos de Façanha",
+      "VitalSpiral": "Espiral Vital (Simples)",
+      "ForceField": "Campo de Força",
+      "ForceFieldEnabled": "Ativado",
+      "Willpower": "Vontade",
+      "Defense": "Defesa",
+      "Armor": "Armadura",
+      "Initiative": "Iniciativa",
+      "CommandRange": "Alcance de Comando",
+      "Race": "Raça",
+      "Careers": "Carreiras",
+      "Archetype": "Arquétipo",
+      "NoRace": "Sem Raça",
+      "NoCareer": "Sem Carreira",
+      "NoArchetype": "Sem Arquétipo",
+      "Error": {
+        "RaceLimit": "Um personagem só pode ter uma Raça.",
+        "CareerLimit": "Um personagem só pode ter no máximo duas Carreiras."
+      },
+      "SkillTotal": "Total",
+      "SkillLevel": "Nível",
+      "Skills": {
+        "Military": "Perícias Militares",
+        "Professional": "Perícias Profissionais",
+        "Social": "Perícias Sociais",
+        "TrainedOnlyLegend": "* Somente Treinado",
+        "GeneralLegend": "⚙ Perícia Geral"
+      },
+      "Inventory": {
+        "WeaponMelee": "Armas Corpo a Corpo",
+        "WeaponRanged": "Armas à Distância",
+        "Armor": "Armaduras e Escudos",
+        "Consumable": "Consumíveis",
+        "Miscellaneous": "Itens Gerais"
+      },
+      "Biography": {
+        "Religion": "Religião",
+        "Height": "Altura",
+        "Weight": "Peso",
+        "Age": "Idade",
+        "Languages": "Idiomas",
+        "Connections": "Conexões",
+        "History": "História / Antecedentes",
+        "Notes": "Notas Gerais"
+      }
     },
     "Settings": {
       "DefaultLanguage": {

@@ -19,6 +19,8 @@ import { RaceData } from "./items/race-data.js";
 import { IKRPGRaceSheet } from "./sheets/race-sheet.js";
 import { CareerData } from "./items/career-data.js";
 import { IKRPGCareerSheet } from "./sheets/career-sheet.js";
+import { CharacterData } from "./actors/character-data.js";
+import { IKRPGCharacterSheet } from "./sheets/character-sheet.js";
 
 // Helper para obter os idiomas disponíveis no manifesto do sistema
 function getAvailableLanguages() {
@@ -77,6 +79,10 @@ Hooks.once("init", () => {
   CONFIG.Item.dataModels.archetype = ArchetypeData;
   CONFIG.Item.dataModels.race = RaceData;
   CONFIG.Item.dataModels.career = CareerData;
+
+  // Registrar Modelos de Dados de Atores (DataModels)
+  CONFIG.Actor.dataModels = CONFIG.Actor.dataModels || {};
+  CONFIG.Actor.dataModels.character = CharacterData;
 
   // Registrar Fichas de Itens
   Items.registerSheet("ikrpg", IKRPGRangedWeaponSheet, {
@@ -139,6 +145,12 @@ Hooks.once("init", () => {
     label: "IKRPG.Career.SheetName"
   });
 
+  Actors.registerSheet("ikrpg", IKRPGCharacterSheet, {
+    types: ["character"],
+    makeDefault: true,
+    label: "IKRPG.Character.SheetName"
+  });
+
   const langs = getAvailableLanguages();
   const defaultLang = determineDefaultLanguage(langs);
 
@@ -194,6 +206,114 @@ Hooks.on("ready", async () => {
       }
     } catch (e) {
       console.error("IKRPG | Erro na carga inicial das perícias padrões:", e);
+    }
+  }
+});
+
+// Hook para inicializar a lista de perícias padrões no momento da criação do personagem
+Hooks.on("preCreateActor", (actor, data, options, userId) => {
+  if (actor.type !== "character") return;
+
+  const defaultSkills = game.settings.get("ikrpg", "customSkills") || [];
+  const skills = defaultSkills.map(skill => {
+    // Definir atributo inicial da perícia. Para perícias sociais, o padrão é intellect (Intelecto).
+    let attr = skill.linkedAttribute || "physique";
+    if (skill.category === "social") {
+      attr = "intellect";
+    }
+
+    return {
+      id: skill.id,
+      name: skill.name || "",
+      nameKey: skill.nameKey || "",
+      category: skill.category || "professional",
+      linkedAttribute: attr,
+      level: 0,
+      trainedOnly: !!skill.trainedOnly,
+      general: !!skill.general
+    };
+  });
+
+  actor.updateSource({ "system.skills": skills });
+});
+
+// Hook para processar as importações de Raça e Carreira no ator de personagem
+Hooks.on("createItem", async (item, options, userId) => {
+  // Executar apenas para o cliente do próprio criador para evitar concorrência
+  if (game.user.id !== userId) return;
+
+  const actor = item.actor;
+  if (!actor || actor.type !== "character") return;
+
+  if (item.type === "race") {
+    const baseStats = item.system.baseStats;
+    if (baseStats) {
+      const updates = {};
+      for (const [stat, val] of Object.entries(baseStats)) {
+        updates[`system.attributes.${stat}.value`] = val;
+      }
+      updates["system.attributes.arcana.available"] = item.system.allowArcane;
+      await actor.update(updates);
+    }
+  } else if (item.type === "career") {
+    const actorSkills = Array.from(actor.system.skills || []);
+    let changed = false;
+
+    const mergeSkills = (careerSkills, defaultCategory) => {
+      if (!careerSkills) return;
+      const allSkills = game.settings.get("ikrpg", "customSkills") || [];
+
+      for (const cs of careerSkills) {
+        if (!cs.id) continue;
+        const existing = actorSkills.find(s => s.id === cs.id);
+        if (existing) {
+          if (existing.level < cs.levelInitial) {
+            existing.level = cs.levelInitial;
+            changed = true;
+          }
+        } else {
+          // Perícia não existente na ficha, tenta buscar nas configurações do sistema
+          const systemSkill = allSkills.find(s => s.id === cs.id);
+          const category = systemSkill?.category || defaultCategory || "professional";
+          
+          let attr = systemSkill?.linkedAttribute || "physique";
+          if (category === "social") {
+            attr = "intellect";
+          }
+
+          let name = cs.name || "";
+          let nameKey = "";
+          if (systemSkill) {
+            nameKey = systemSkill.nameKey || "";
+            if (nameKey) {
+              const localized = game.i18n.localize(nameKey);
+              name = localized !== nameKey ? localized : (systemSkill.name || cs.name || cs.id);
+            } else {
+              name = systemSkill.name || cs.name || cs.id;
+            }
+          }
+
+          actorSkills.push({
+            id: cs.id,
+            name: name,
+            nameKey: nameKey,
+            category: category,
+            linkedAttribute: attr,
+            level: cs.levelInitial,
+            trainedOnly: systemSkill ? !!systemSkill.trainedOnly : false,
+            general: systemSkill ? !!systemSkill.general : false
+          });
+          changed = true;
+        }
+      }
+    };
+
+    mergeSkills(item.system.militarySkills, "military");
+    mergeSkills(item.system.socialSkills, "social");
+    mergeSkills(item.system.careerSkills, "professional");
+
+    if (changed) {
+      await actor.update({ "system.skills": actorSkills });
     }
   }
 });

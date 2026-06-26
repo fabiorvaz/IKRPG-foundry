@@ -80,8 +80,7 @@
         <table class="career-skills-table" style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem;">
-              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Identifier"}}</th>
-              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Name"}}</th>
+              <th style="text-align: left; padding: 4px;" colspan="2">{{localize "IKRPG.Career.Skill"}}</th>
               <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelInitial"}}</th>
               <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelMax"}}</th>
               <th style="text-align: center; padding: 4px; width: 50px;">Ação</th>
@@ -90,11 +89,15 @@
           <tbody>
             {{#each system.militarySkills}}
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-              <td style="padding: 4px;">
-                <input name="system.militarySkills.{{@index}}.id" type="text" value="{{this.id}}" placeholder="ex: hand-weapon" />
-              </td>
-              <td style="padding: 4px;">
-                <input name="system.militarySkills.{{@index}}.name" type="text" value="{{this.name}}" placeholder="ex: Arma de Combate" />
+              <td style="padding: 4px;" colspan="2">
+                <select name="system.militarySkills.{{@index}}.id" style="width: 100%;">
+                  {{#select this.id}}
+                  <option value="">-- {{localize "IKRPG.Career.SelectSkill"}} --</option>
+                  {{#each ../militaryChoices}}
+                  <option value="{{this.id}}">{{this.name}}</option>
+                  {{/each}}
+                  {{/select}}
+                </select>
               </td>
               <td style="padding: 4px; text-align: center;">
                 <input name="system.militarySkills.{{@index}}.levelInitial" type="number" value="{{this.levelInitial}}" style="text-align: center; width: 55px;" min="0" />
@@ -124,8 +127,7 @@
         <table class="career-skills-table" style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem;">
-              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Identifier"}}</th>
-              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Name"}}</th>
+              <th style="text-align: left; padding: 4px;" colspan="2">{{localize "IKRPG.Career.Skill"}}</th>
               <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelInitial"}}</th>
               <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelMax"}}</th>
               <th style="text-align: center; padding: 4px; width: 50px;">Ação</th>
@@ -134,11 +136,15 @@
           <tbody>
             {{#each system.socialSkills}}
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-              <td style="padding: 4px;">
-                <input name="system.socialSkills.{{@index}}.id" type="text" value="{{this.id}}" placeholder="ex: negotiation" />
-              </td>
-              <td style="padding: 4px;">
-                <input name="system.socialSkills.{{@index}}.name" type="text" value="{{this.name}}" placeholder="ex: Negociação" />
+              <td style="padding: 4px;" colspan="2">
+                <select name="system.socialSkills.{{@index}}.id" style="width: 100%;">
+                  {{#select this.id}}
+                  <option value="">-- {{localize "IKRPG.Career.SelectSkill"}} --</option>
+                  {{#each ../socialChoices}}
+                  <option value="{{this.id}}">{{this.name}}</option>
+                  {{/each}}
+                  {{/select}}
+                </select>
               </td>
               <td style="padding: 4px; text-align: center;">
                 <input name="system.socialSkills.{{@index}}.levelInitial" type="number" value="{{this.levelInitial}}" style="text-align: center; width: 55px;" min="0" />
@@ -168,8 +174,7 @@
         <table class="career-skills-table" style="width: 100%; border-collapse: collapse;">
           <thead>
             <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem;">
-              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Identifier"}}</th>
-              <th style="text-align: left; padding: 4px;">{{localize "IKRPG.Common.Name"}}</th>
+              <th style="text-align: left; padding: 4px;" colspan="2">{{localize "IKRPG.Career.Skill"}}</th>
               <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelInitial"}}</th>
               <th style="text-align: center; padding: 4px; width: 80px;">{{localize "IKRPG.Career.LevelMax"}}</th>
               <th style="text-align: center; padding: 4px; width: 50px;">Ação</th>
@@ -178,11 +183,15 @@
           <tbody>
             {{#each system.careerSkills}}
             <tr style="border-bottom: 1px solid rgba(255,255,255,0.05);">
-              <td style="padding: 4px;">
-                <input name="system.careerSkills.{{@index}}.id" type="text" value="{{this.id}}" placeholder="ex: craft-metalworking" />
-              </td>
-              <td style="padding: 4px;">
-                <input name="system.careerSkills.{{@index}}.name" type="text" value="{{this.name}}" placeholder="ex: Ofício (Metalurgia)" />
+              <td style="padding: 4px;" colspan="2">
+                <select name="system.careerSkills.{{@index}}.id" style="width: 100%;">
+                  {{#select this.id}}
+                  <option value="">-- {{localize "IKRPG.Career.SelectSkill"}} --</option>
+                  {{#each ../careerChoices}}
+                  <option value="{{this.id}}">{{this.name}}</option>
+                  {{/each}}
+                  {{/select}}
+                </select>
               </td>
               <td style="padding: 4px; text-align: center;">
                 <input name="system.careerSkills.{{@index}}.levelInitial" type="number" value="{{this.levelInitial}}" style="text-align: center; width: 55px;" min="0" />

@@ -22,6 +22,9 @@
     }
   ],
   "documentTypes": {
+    "Actor": [
+      "character"
+    ],
     "Item": [
       "meleeWeapon",
       "rangedWeapon",

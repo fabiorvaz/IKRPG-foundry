@@ -1,0 +1,756 @@
+<form class="ikrpg-character-sheet {{cssClass}}" autocomplete="off">
+  <!-- Cabeçalho da Ficha -->
+  <header class="sheet-header">
+    <img class="profile-img" src="{{actor.img}}" data-edit="img" title="{{actor.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{actor.name}}" placeholder="{{localize 'IKRPG.Common.Name'}}" required />
+      </h1>
+      <div class="item-meta">
+        <span class="item-type-badge">{{localize "IKRPG.Character.Badge"}}</span>
+        <div class="item-identifier-group">
+          <span><strong>{{localize "IKRPG.Character.Race"}}:</strong> {{#if race}}{{race.name}}{{else}}{{localize "IKRPG.Character.NoRace"}}{{/if}}</span>
+          <span>|</span>
+          <span><strong>{{localize "IKRPG.Character.Archetype"}}:</strong> {{#if archetype}}{{archetype.name}}{{else}}{{localize "IKRPG.Character.NoArchetype"}}{{/if}}</span>
+          <span>|</span>
+          <span><strong>{{localize "IKRPG.Character.Careers"}}:</strong> 
+            {{#if careers}}
+              {{#each careers}}{{this.name}}{{#unless @last}}, {{/unless}}{{/each}}
+            {{else}}
+              {{localize "IKRPG.Character.NoCareer"}}
+            {{/if}}
+          </span>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Abas de Navegação -->
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="attributes"><i class="fas fa-sliders-h"></i> {{localize "IKRPG.Character.TabAttributes"}}</a>
+    <a class="item" data-tab="inventory"><i class="fas fa-backpack"></i> {{localize "IKRPG.Character.TabInventory"}}</a>
+    <a class="item" data-tab="abilities"><i class="fas fa-award"></i> {{localize "IKRPG.Character.TabAbilities"}}</a>
+    <a class="item" data-tab="spells"><i class="fas fa-fire"></i> {{localize "IKRPG.Character.TabSpells"}}</a>
+    <a class="item" data-tab="biography"><i class="fas fa-scroll"></i> {{localize "IKRPG.Character.TabMiscellaneous"}}</a>
+    <a class="item" data-tab="progression"><i class="fas fa-level-up-alt"></i> {{localize "IKRPG.Character.TabProgression"}}</a>
+  </nav>
+
+  <!-- Corpo da Ficha -->
+  <section class="sheet-body">
+    <!-- ABA: Atributos & Perícias -->
+    <div class="tab attributes active" data-group="primary" data-tab="attributes">
+      <!-- Grid de Atributos Primários (3x3) -->
+      <div class="attributes-grid">
+        <!-- Físico -->
+        <div class="attribute-card">
+          <span class="attribute-label">{{localize "IKRPG.Attribute.Physique"}}</span>
+          <div class="attribute-values">
+            <input name="system.attributes.physique.value" type="number" value="{{system.attributes.physique.value}}" min="0" />
+            <span class="attribute-max-divider">/</span>
+            <span class="attribute-max-value">{{maxStats.physique}}</span>
+          </div>
+        </div>
+        <!-- Força -->
+        <div class="attribute-card">
+          <span class="attribute-label">{{localize "IKRPG.Attribute.Strength"}}</span>
+          <div class="attribute-values">
+            <input name="system.attributes.strength.value" type="number" value="{{system.attributes.strength.value}}" min="0" />
+            <span class="attribute-max-divider">/</span>
+            <span class="attribute-max-value">{{maxStats.strength}}</span>
+          </div>
+        </div>
+        <!-- Velocidade -->
+        <div class="attribute-card">
+          <span class="attribute-label">{{localize "IKRPG.Attribute.Speed"}}</span>
+          <div class="attribute-values">
+            <input name="system.attributes.speed.value" type="number" value="{{system.attributes.speed.value}}" min="0" />
+            <span class="attribute-max-divider">/</span>
+            <span class="attribute-max-value">{{maxStats.speed}}</span>
+          </div>
+        </div>
+        <!-- Agilidade -->
+        <div class="attribute-card">
+          <span class="attribute-label">{{localize "IKRPG.Attribute.Agility"}}</span>
+          <div class="attribute-values">
+            <input name="system.attributes.agility.value" type="number" value="{{system.attributes.agility.value}}" min="0" />
+            <span class="attribute-max-divider">/</span>
+            <span class="attribute-max-value">{{maxStats.agility}}</span>
+          </div>
+        </div>
+        <!-- Destreza -->
+        <div class="attribute-card">
+          <span class="attribute-label">{{localize "IKRPG.Attribute.Dexterity"}}</span>
+          <div class="attribute-values">
+            <input name="system.attributes.dexterity.value" type="number" value="{{system.attributes.dexterity.value}}" min="0" />
+            <span class="attribute-max-divider">/</span>
+            <span class="attribute-max-value">{{maxStats.dexterity}}</span>
+          </div>
+        </div>
+        <!-- Maestria -->
+        <div class="attribute-card">
+          <span class="attribute-label">{{localize "IKRPG.Attribute.Mastery"}}</span>
+          <div class="attribute-values">
+            <input name="system.attributes.mastery.value" type="number" value="{{system.attributes.mastery.value}}" min="0" />
+            <span class="attribute-max-divider">/</span>
+            <span class="attribute-max-value">{{maxStats.mastery}}</span>
+          </div>
+        </div>
+        <!-- Intelecto -->
+        <div class="attribute-card">
+          <span class="attribute-label">{{localize "IKRPG.Attribute.Intellect"}}</span>
+          <div class="attribute-values">
+            <input name="system.attributes.intellect.value" type="number" value="{{system.attributes.intellect.value}}" min="0" />
+            <span class="attribute-max-divider">/</span>
+            <span class="attribute-max-value">{{maxStats.intellect}}</span>
+          </div>
+        </div>
+        <!-- Arcana -->
+        <div class="attribute-card">
+          <span class="attribute-label">{{localize "IKRPG.Attribute.Arcana"}}</span>
+          <div class="attribute-values">
+            {{#if isArcanaAvailable}}
+              <input name="system.attributes.arcana.value" type="number" value="{{system.attributes.arcana.value}}" min="0" />
+            {{else}}
+              <span class="attribute-max-value">-</span>
+            {{/if}}
+            <span class="attribute-max-divider">/</span>
+            <span class="attribute-max-value">{{maxStats.arcana}}</span>
+          </div>
+        </div>
+        <!-- Percepção -->
+        <div class="attribute-card">
+          <span class="attribute-label">{{localize "IKRPG.Attribute.Perception"}}</span>
+          <div class="attribute-values">
+            <input name="system.attributes.perception.value" type="number" value="{{system.attributes.perception.value}}" min="0" />
+            <span class="attribute-max-divider">/</span>
+            <span class="attribute-max-value">{{maxStats.perception}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Barra de Atributos Derivados -->
+      <div class="derived-attributes-row">
+        <div class="derived-attribute-box">
+          <div class="derived-label">{{localize "IKRPG.Character.Willpower"}}</div>
+          <div class="derived-value">{{system.willpower}}</div>
+        </div>
+        <div class="derived-attribute-box">
+          <div class="derived-label">{{localize "IKRPG.Character.Defense"}}</div>
+          <div class="derived-value">{{system.defense}}</div>
+        </div>
+        <div class="derived-attribute-box">
+          <div class="derived-label">{{localize "IKRPG.Character.Armor"}}</div>
+          <div class="derived-value">{{system.armor}}</div>
+        </div>
+        <div class="derived-attribute-box">
+          <div class="derived-label">{{localize "IKRPG.Character.Initiative"}}</div>
+          <div class="derived-value">{{system.initiative}}</div>
+        </div>
+        <div class="derived-attribute-box">
+          <div class="derived-label">{{localize "IKRPG.Character.CommandRange"}}</div>
+          <div class="derived-value">{{system.commandRange}}</div>
+        </div>
+      </div>
+
+      <!-- Pontos de Façanha -->
+      <div class="feat-points-container">
+        <label><i class="fas fa-dice-d20"></i> {{localize "IKRPG.Character.FeatPoints"}}</label>
+        <input name="system.featPoints" type="number" value="{{system.featPoints}}" min="0" max="3" />
+      </div>
+
+      <!-- Espiral Vital Simples -->
+      <div class="vital-spiral-panel">
+        <h3><i class="fas fa-heartbeat"></i> {{localize "IKRPG.Character.VitalSpiral"}}</h3>
+        <div class="vital-spiral-tracks">
+          <!-- Physique 1 -->
+          <div class="vital-spiral-track-row physique">
+            <span class="track-label">Físico 1</span>
+            <div class="track-checkboxes" data-track="physique1">
+              {{#each physique1_boxes}}
+                <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
+              {{/each}}
+            </div>
+          </div>
+          <!-- Physique 2 -->
+          <div class="vital-spiral-track-row physique">
+            <span class="track-label">Físico 2</span>
+            <div class="track-checkboxes" data-track="physique2">
+              {{#each physique2_boxes}}
+                <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
+              {{/each}}
+            </div>
+          </div>
+          <!-- Agility 1 -->
+          <div class="vital-spiral-track-row agility">
+            <span class="track-label">Agilidade 1</span>
+            <div class="track-checkboxes" data-track="agility1">
+              {{#each agility1_boxes}}
+                <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
+              {{/each}}
+            </div>
+          </div>
+          <!-- Agility 2 -->
+          <div class="vital-spiral-track-row agility">
+            <span class="track-label">Agilidade 2</span>
+            <div class="track-checkboxes" data-track="agility2">
+              {{#each agility2_boxes}}
+                <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
+              {{/each}}
+            </div>
+          </div>
+          <!-- Intellect 1 -->
+          <div class="vital-spiral-track-row intellect">
+            <span class="track-label">Intelecto 1</span>
+            <div class="track-checkboxes" data-track="intellect1">
+              {{#each intellect1_boxes}}
+                <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
+              {{/each}}
+            </div>
+          </div>
+          <!-- Intellect 2 -->
+          <div class="vital-spiral-track-row intellect">
+            <span class="track-label">Intelecto 2</span>
+            <div class="track-checkboxes" data-track="intellect2">
+              {{#each intellect2_boxes}}
+                <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
+              {{/each}}
+            </div>
+          </div>
+        </div>
+
+        <!-- Campo de Força -->
+        <div class="force-field-row">
+          <span class="ff-label"><i class="fas fa-shield-alt"></i> {{localize "IKRPG.Character.ForceField"}}</span>
+          <div class="ff-controls">
+            <label>
+              <input name="system.forceField.enabled" type="checkbox" {{#if system.forceField.enabled}}checked{{/if}} />
+              {{localize "IKRPG.Character.ForceFieldEnabled"}}
+            </label>
+            <div class="ff-checkboxes-container">
+              {{#each forceField_boxes}}
+                <input type="checkbox" class="ff-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} {{#unless ../system.forceField.enabled}}disabled{{/unless}} />
+              {{/each}}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tabelas de Perícias -->
+      <div class="skills-section">
+        <!-- Perícias Militares -->
+        <div class="skills-table-container">
+          <h3>{{localize "IKRPG.Character.Skills.Military"}}</h3>
+          <table class="skills-table">
+            <thead>
+              <tr>
+                <th>Perícia</th>
+                <th>Atributo</th>
+                <th style="width: 80px; text-align: center;">Atributo</th>
+                <th style="width: 80px; text-align: center;">Nível</th>
+                <th style="width: 80px; text-align: center;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each militarySkills}}
+              <tr class="skill-row">
+                <td class="skill-name-col">
+                  {{displayName}}
+                  {{#if trainedOnly}}<span class="skill-marker-trained" title="{{localize 'IKRPG.Character.Skills.TrainedOnlyLegend'}}">*</span>{{/if}}
+                  {{#if general}}<span class="skill-marker-general" title="{{localize 'IKRPG.Character.Skills.GeneralLegend'}}">⚙</span>{{/if}}
+                </td>
+                <td>
+                  <select class="skill-attribute-select" data-index="{{index}}">
+                    {{#select linkedAttribute}}
+                    {{#each ../basicAttributes}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                  </select>
+                </td>
+                <td style="text-align: center;">
+                  <input type="text" class="skill-number-input" value="{{attributeDisplay}}" readonly />
+                </td>
+                <td style="text-align: center;">
+                  <input type="number" class="skill-level-input" data-index="{{index}}" value="{{level}}" min="0" />
+                </td>
+                <td style="text-align: center;">
+                  <input type="text" class="skill-total-input" value="{{total}}" readonly />
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Perícias Profissionais -->
+        <div class="skills-table-container">
+          <h3>{{localize "IKRPG.Character.Skills.Professional"}}</h3>
+          <table class="skills-table">
+            <thead>
+              <tr>
+                <th>Perícia</th>
+                <th>Atributo</th>
+                <th style="width: 80px; text-align: center;">Atributo</th>
+                <th style="width: 80px; text-align: center;">Nível</th>
+                <th style="width: 80px; text-align: center;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each professionalSkills}}
+              <tr class="skill-row">
+                <td class="skill-name-col">
+                  {{displayName}}
+                  {{#if trainedOnly}}<span class="skill-marker-trained" title="{{localize 'IKRPG.Character.Skills.TrainedOnlyLegend'}}">*</span>{{/if}}
+                  {{#if general}}<span class="skill-marker-general" title="{{localize 'IKRPG.Character.Skills.GeneralLegend'}}">⚙</span>{{/if}}
+                </td>
+                <td>
+                  <select class="skill-attribute-select" data-index="{{index}}">
+                    {{#select linkedAttribute}}
+                    {{#each ../basicAttributes}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                  </select>
+                </td>
+                <td style="text-align: center;">
+                  <input type="text" class="skill-number-input" value="{{attributeDisplay}}" readonly />
+                </td>
+                <td style="text-align: center;">
+                  <input type="number" class="skill-level-input" data-index="{{index}}" value="{{level}}" min="0" />
+                </td>
+                <td style="text-align: center;">
+                  <input type="text" class="skill-total-input" value="{{total}}" readonly />
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Perícias Sociais -->
+        <div class="skills-table-container">
+          <h3>{{localize "IKRPG.Character.Skills.Social"}}</h3>
+          <table class="skills-table">
+            <thead>
+              <tr>
+                <th>Perícia</th>
+                <th>Atributo</th>
+                <th style="width: 80px; text-align: center;">Atributo</th>
+                <th style="width: 80px; text-align: center;">Nível</th>
+                <th style="width: 80px; text-align: center;">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {{#each socialSkills}}
+              <tr class="skill-row">
+                <td class="skill-name-col">
+                  {{displayName}}
+                  {{#if trainedOnly}}<span class="skill-marker-trained" title="{{localize 'IKRPG.Character.Skills.TrainedOnlyLegend'}}">*</span>{{/if}}
+                  {{#if general}}<span class="skill-marker-general" title="{{localize 'IKRPG.Character.Skills.GeneralLegend'}}">⚙</span>{{/if}}
+                </td>
+                <td>
+                  <select class="skill-attribute-select" data-index="{{index}}">
+                    {{#select linkedAttribute}}
+                    {{#each ../basicAttributes}}
+                    <option value="{{@key}}">{{this}}</option>
+                    {{/each}}
+                    {{/select}}
+                  </select>
+                </td>
+                <td style="text-align: center;">
+                  <input type="text" class="skill-number-input" value="{{attributeDisplay}}" readonly />
+                </td>
+                <td style="text-align: center;">
+                  <input type="number" class="skill-level-input" data-index="{{index}}" value="{{level}}" min="0" />
+                </td>
+                <td style="text-align: center;">
+                  <input type="text" class="skill-total-input" value="{{total}}" readonly />
+                </td>
+              </tr>
+              {{/each}}
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Legenda -->
+        <div class="skills-legend">
+          <span><strong>*</strong> {{localize "IKRPG.Character.Skills.TrainedOnlyLegend"}}</span>
+          <span><strong>⚙</strong> {{localize "IKRPG.Character.Skills.GeneralLegend"}}</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA: Inventário -->
+    <div class="tab inventory" data-group="primary" data-tab="inventory">
+      <!-- Armas Corpo a Corpo -->
+      <div class="item-list-container">
+        <div class="item-list-header">
+          <h3>{{localize "IKRPG.Character.Inventory.WeaponMelee"}}</h3>
+        </div>
+        <div class="item-list-body">
+          {{#each weaponsMelee}}
+          <div class="item-row" data-item-id="{{this.id}}">
+            <div class="item-name-info">
+              <img class="item-icon" src="{{this.img}}" />
+              <span>{{this.name}}</span>
+            </div>
+            <div class="item-details">
+              <span><strong>POW:</strong> {{this.system.power}}</span>
+              {{#if this.system.equipped}}
+                <span class="item-type-badge" style="background: var(--ikrpg-accent-teal); color:#fff; font-size:0.7rem;">Equipado</span>
+              {{/if}}
+            </div>
+            <div class="item-actions">
+              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          {{else}}
+          <div class="empty-placeholder" style="padding: 10px; text-align: center; color: var(--ikrpg-text-secondary);">Sem armas corpo a corpo.</div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- Armas à Distância -->
+      <div class="item-list-container">
+        <div class="item-list-header">
+          <h3>{{localize "IKRPG.Character.Inventory.WeaponRanged"}}</h3>
+        </div>
+        <div class="item-list-body">
+          {{#each weaponsRanged}}
+          <div class="item-row" data-item-id="{{this.id}}">
+            <div class="item-name-info">
+              <img class="item-icon" src="{{this.img}}" />
+              <span>{{this.name}}</span>
+            </div>
+            <div class="item-details">
+              <span><strong>POW:</strong> {{this.system.power}}</span>
+              <span><strong>RNG:</strong> {{this.system.range}}</span>
+              {{#if this.system.equipped}}
+                <span class="item-type-badge" style="background: var(--ikrpg-accent-teal); color:#fff; font-size:0.7rem;">Equipado</span>
+              {{/if}}
+            </div>
+            <div class="item-actions">
+              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          {{else}}
+          <div class="empty-placeholder" style="padding: 10px; text-align: center; color: var(--ikrpg-text-secondary);">Sem armas à distância.</div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- Armaduras -->
+      <div class="item-list-container">
+        <div class="item-list-header">
+          <h3>{{localize "IKRPG.Character.Inventory.Armor"}}</h3>
+        </div>
+        <div class="item-list-body">
+          {{#each armor}}
+          <div class="item-row" data-item-id="{{this.id}}">
+            <div class="item-name-info">
+              <img class="item-icon" src="{{this.img}}" />
+              <span>{{this.name}}</span>
+            </div>
+            <div class="item-details">
+              <span><strong>ARM:</strong> {{this.system.armorModifier}}</span>
+              <span><strong>DEF:</strong> {{this.system.defenseModifier}}</span>
+              <span><strong>SPD:</strong> {{this.system.speedModifier}}</span>
+              {{#if this.system.equipped}}
+                <span class="item-type-badge" style="background: var(--ikrpg-accent-teal); color:#fff; font-size:0.7rem;">Equipado</span>
+              {{/if}}
+            </div>
+            <div class="item-actions">
+              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          {{else}}
+          <div class="empty-placeholder" style="padding: 10px; text-align: center; color: var(--ikrpg-text-secondary);">Sem armaduras ou escudos.</div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- Consumíveis -->
+      <div class="item-list-container">
+        <div class="item-list-header">
+          <h3>{{localize "IKRPG.Character.Inventory.Consumable"}}</h3>
+        </div>
+        <div class="item-list-body">
+          {{#each consumables}}
+          <div class="item-row" data-item-id="{{this.id}}">
+            <div class="item-name-info">
+              <img class="item-icon" src="{{this.img}}" />
+              <span>{{this.name}}</span>
+            </div>
+            <div class="item-details">
+              <span><strong>Qtd:</strong> {{this.system.quantity}}</span>
+            </div>
+            <div class="item-actions">
+              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          {{else}}
+          <div class="empty-placeholder" style="padding: 10px; text-align: center; color: var(--ikrpg-text-secondary);">Sem consumíveis.</div>
+          {{/each}}
+        </div>
+      </div>
+
+      <!-- Miscelânea -->
+      <div class="item-list-container">
+        <div class="item-list-header">
+          <h3>{{localize "IKRPG.Character.Inventory.Miscellaneous"}}</h3>
+        </div>
+        <div class="item-list-body">
+          {{#each miscellaneous}}
+          <div class="item-row" data-item-id="{{this.id}}">
+            <div class="item-name-info">
+              <img class="item-icon" src="{{this.img}}" />
+              <span>{{this.name}}</span>
+            </div>
+            <div class="item-details">
+              <span><strong>Qtd:</strong> {{this.system.quantity}}</span>
+            </div>
+            <div class="item-actions">
+              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          {{else}}
+          <div class="empty-placeholder" style="padding: 10px; text-align: center; color: var(--ikrpg-text-secondary);">Sem itens de miscelânea.</div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA: Habilidades -->
+    <div class="tab abilities" data-group="primary" data-tab="abilities">
+      <div class="item-list-container">
+        <div class="item-list-header">
+          <h3>{{localize "IKRPG.Character.TabAbilities"}}</h3>
+        </div>
+        <div class="item-list-body">
+          {{#each abilities}}
+          <div class="item-row" data-item-id="{{this.id}}">
+            <div class="item-name-info">
+              <img class="item-icon" src="{{this.img}}" />
+              <span>{{this.name}}</span>
+            </div>
+            <div class="item-details">
+              <span class="item-type-badge">{{localize (concat "IKRPG.Ability.Type" (capitalize this.system.type))}}</span>
+            </div>
+            <div class="item-actions">
+              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          {{else}}
+          <div class="empty-placeholder" style="padding: 16px; text-align: center; color: var(--ikrpg-text-secondary);">Sem habilidades importadas.</div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+
+    <!-- ABA: Magias -->
+    <div class="tab spells" data-group="primary" data-tab="spells">
+      {{#if isArcanaAvailable}}
+      <div class="item-list-container">
+        <div class="item-list-header">
+          <h3>{{localize "IKRPG.Character.TabSpells"}}</h3>
+        </div>
+        <div class="item-list-body">
+          {{#each spells}}
+          <div class="item-row" data-item-id="{{this.id}}">
+            <div class="item-name-info">
+              <img class="item-icon" src="{{this.img}}" />
+              <span>{{this.name}}</span>
+            </div>
+            <div class="item-details">
+              <span><strong>Custo:</strong> {{this.system.cost}}</span>
+              <span><strong>POW:</strong> {{this.system.power}}</span>
+              <span><strong>RNG:</strong> {{this.system.range}}</span>
+            </div>
+            <div class="item-actions">
+              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+            </div>
+          </div>
+          {{else}}
+          <div class="empty-placeholder" style="padding: 16px; text-align: center; color: var(--ikrpg-text-secondary);">Sem magias aprendidas.</div>
+          {{/each}}
+        </div>
+      </div>
+      {{else}}
+      <div class="empty-placeholder" style="padding: 30px; text-align: center; color: var(--ikrpg-text-secondary);">
+        <i class="fas fa-lock" style="font-size: 2.5rem; margin-bottom: 12px; display: block; color: var(--ikrpg-accent-red);"></i>
+        <p>A conjuração de magia está indisponível para esta raça (Atributo Arcana desativado).</p>
+      </div>
+      {{/if}}
+    </div>
+
+    <!-- ABA: Geral & Biografia -->
+    <div class="tab biography" data-group="primary" data-tab="biography">
+      <div class="properties-grid">
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-pray"></i> {{localize "IKRPG.Character.Biography.Religion"}}</span>
+          <div class="form-fields">
+            <input name="system.religion" type="text" value="{{system.religion}}" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-text-height"></i> {{localize "IKRPG.Character.Biography.Height"}}</span>
+          <div class="form-fields">
+            <input name="system.height" type="text" value="{{system.height}}" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-weight"></i> {{localize "IKRPG.Character.Biography.Weight"}}</span>
+          <div class="form-fields">
+            <input name="system.weight" type="text" value="{{system.weight}}" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-hourglass-half"></i> {{localize "IKRPG.Character.Biography.Age"}}</span>
+          <div class="form-fields">
+            <input name="system.age" type="text" value="{{system.age}}" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-language"></i> {{localize "IKRPG.Character.Biography.Languages"}}</span>
+          <div class="form-fields">
+            <input name="system.languages" type="text" value="{{system.languages}}" />
+          </div>
+        </div>
+
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-users"></i> {{localize "IKRPG.Character.Biography.Connections"}}</span>
+          <div class="form-fields">
+            <input name="system.connections" type="text" value="{{system.connections}}" />
+          </div>
+        </div>
+      </div>
+
+      <div class="item-list-container" style="margin-top: 16px;">
+        <div class="item-list-header">
+          <h3>{{localize "IKRPG.Character.Biography.History"}}</h3>
+        </div>
+        {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+      </div>
+
+      <div class="item-list-container">
+        <div class="item-list-header">
+          <h3>{{localize "IKRPG.Character.Biography.Notes"}}</h3>
+        </div>
+        {{editor system.notes target="system.notes" button=true owner=owner editable=editable}}
+      </div>
+    </div>
+
+    <!-- ABA: Experiência & Evolução -->
+    <div class="tab progression" data-group="primary" data-tab="progression">
+      <div class="progression-panel">
+        <div class="progression-controls">
+          <h3>{{localize "IKRPG.Character.TabProgression"}}</h3>
+          
+          <div class="form-group">
+            <span class="form-label"><i class="fas fa-star"></i> {{localize "IKRPG.Character.XP"}}</span>
+            <div class="form-fields">
+              <input name="system.xp" type="number" value="{{system.xp}}" min="0" />
+            </div>
+          </div>
+
+          <div class="form-group">
+            <span class="form-label"><i class="fas fa-chart-line"></i> {{localize "IKRPG.Character.Tier"}}</span>
+            <div class="form-fields">
+              <select name="system.tier">
+                {{#select system.tier}}
+                {{#each evolutionTiers}}
+                <option value="{{@key}}">{{this}}</option>
+                {{/each}}
+                {{/select}}
+              </select>
+            </div>
+          </div>
+
+          <!-- Resumo de Itens Críticos de Evolução -->
+          <div style="margin-top: 12px; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 12px; font-size: 0.95rem;">
+            <p style="margin: 4px 0;"><strong>{{localize "IKRPG.Character.Race"}}:</strong> {{#if race}}{{race.name}}{{else}}<span style="color:var(--ikrpg-accent-red)">{{localize "IKRPG.Character.NoRace"}}</span>{{/if}}</p>
+            <p style="margin: 4px 0;"><strong>{{localize "IKRPG.Character.Archetype"}}:</strong> {{#if archetype}}{{archetype.name}}{{else}}<span>{{localize "IKRPG.Character.NoArchetype"}}</span>{{/if}}</p>
+            <p style="margin: 4px 0;"><strong>{{localize "IKRPG.Character.Careers"}}:</strong> 
+              {{#if careers}}
+                {{#each careers}}{{this.name}}{{#unless @last}}, {{/unless}}{{/each}}
+              {{else}}
+                <span style="color:var(--ikrpg-accent-red)">{{localize "IKRPG.Character.NoCareer"}}</span>
+              {{/if}}
+            </p>
+          </div>
+        </div>
+
+        <div class="progression-limits-table">
+          <h3><i class="fas fa-shield-alt"></i> Limites Raciais de Atributo (Estágio Atual)</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>Atributo</th>
+                <th style="text-align: center;">Atual</th>
+                <th style="text-align: center;">Máximo</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>{{localize "IKRPG.Attribute.Physique"}}</td>
+                <td style="text-align: center;"><strong>{{system.attributes.physique.value}}</strong></td>
+                <td style="text-align: center;">{{maxStats.physique}}</td>
+              </tr>
+              <tr>
+                <td>{{localize "IKRPG.Attribute.Strength"}}</td>
+                <td style="text-align: center;"><strong>{{system.attributes.strength.value}}</strong></td>
+                <td style="text-align: center;">{{maxStats.strength}}</td>
+              </tr>
+              <tr>
+                <td>{{localize "IKRPG.Attribute.Speed"}}</td>
+                <td style="text-align: center;"><strong>{{system.attributes.speed.value}}</strong></td>
+                <td style="text-align: center;">{{maxStats.speed}}</td>
+              </tr>
+              <tr>
+                <td>{{localize "IKRPG.Attribute.Agility"}}</td>
+                <td style="text-align: center;"><strong>{{system.attributes.agility.value}}</strong></td>
+                <td style="text-align: center;">{{maxStats.agility}}</td>
+              </tr>
+              <tr>
+                <td>{{localize "IKRPG.Attribute.Dexterity"}}</td>
+                <td style="text-align: center;"><strong>{{system.attributes.dexterity.value}}</strong></td>
+                <td style="text-align: center;">{{maxStats.dexterity}}</td>
+              </tr>
+              <tr>
+                <td>{{localize "IKRPG.Attribute.Mastery"}}</td>
+                <td style="text-align: center;"><strong>{{system.attributes.mastery.value}}</strong></td>
+                <td style="text-align: center;">{{maxStats.mastery}}</td>
+              </tr>
+              <tr>
+                <td>{{localize "IKRPG.Attribute.Intellect"}}</td>
+                <td style="text-align: center;"><strong>{{system.attributes.intellect.value}}</strong></td>
+                <td style="text-align: center;">{{maxStats.intellect}}</td>
+              </tr>
+              <tr>
+                <td>{{localize "IKRPG.Attribute.Arcana"}}</td>
+                <td style="text-align: center;"><strong>{{#if isArcanaAvailable}}{{system.attributes.arcana.value}}{{else}}-{{/if}}</strong></td>
+                <td style="text-align: center;">{{maxStats.arcana}}</td>
+              </tr>
+              <tr>
+                <td>{{localize "IKRPG.Attribute.Perception"}}</td>
+                <td style="text-align: center;"><strong>{{system.attributes.perception.value}}</strong></td>
+                <td style="text-align: center;">{{maxStats.perception}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+</form>

@@ -29,7 +29,81 @@ export class IKRPGCareerSheet extends ItemSheet {
     // Provide direct reference to system fields for easier template access
     context.system = this.item.system;
 
+    // Obter as perícias configuradas no sistema
+    const allSkills = game.settings.get("ikrpg", "customSkills") || [];
+    
+    const mapSkill = (s) => {
+      let displayName = s.nameKey ? game.i18n.localize(s.nameKey) : s.name;
+      if (displayName === s.nameKey) displayName = s.name;
+      return {
+        id: s.id,
+        name: displayName || s.name || s.id
+      };
+    };
+
+    const militaryChoices = allSkills.filter(s => s.category === "military").map(mapSkill);
+    const socialChoices = allSkills.filter(s => s.category === "social").map(mapSkill);
+    const careerChoices = allSkills.filter(s => s.category === "professional").map(mapSkill);
+
+    // Enriquecimento dinâmico para perícias desconhecidas/deletadas que estão salvas no item
+    const addUnknownChoices = (currentSkills, choices) => {
+      for (const cs of (currentSkills || [])) {
+        if (cs.id && !choices.some(c => c.id === cs.id)) {
+          const labelDesconhecido = game.i18n.localize("IKRPG.Career.UnknownSkill") || "Desconhecida";
+          choices.push({
+            id: cs.id,
+            name: `[${labelDesconhecido}] ${cs.name || cs.id}`
+          });
+        }
+      }
+    };
+
+    addUnknownChoices(this.item.system.militarySkills, militaryChoices);
+    addUnknownChoices(this.item.system.socialSkills, socialChoices);
+    addUnknownChoices(this.item.system.careerSkills, careerChoices);
+
+    context.militaryChoices = militaryChoices;
+    context.socialChoices = socialChoices;
+    context.careerChoices = careerChoices;
+
     return context;
+  }
+
+  /** @override */
+  async _updateObject(event, formData) {
+    const allSkills = game.settings.get("ikrpg", "customSkills") || [];
+    
+    // Sincronizar o nome com as configurações do sistema dinamicamente
+    const populateNames = (prefix) => {
+      const keys = Object.keys(formData).filter(k => k.startsWith(prefix) && k.endsWith(".id"));
+      for (const key of keys) {
+        const idValue = formData[key];
+        const nameKey = key.replace(/\.id$/, ".name");
+        
+        if (idValue) {
+          const skill = allSkills.find(s => s.id === idValue);
+          if (skill) {
+            let displayName = skill.nameKey ? game.i18n.localize(skill.nameKey) : skill.name;
+            if (displayName === skill.nameKey) displayName = skill.name;
+            formData[nameKey] = displayName || skill.name || idValue;
+          } else {
+            // Se o ID é desconhecido, tenta preservar o nome antigo caso já estivesse no item
+            const index = key.match(/\.(\d+)\.id$/)?.[1];
+            const originalSkills = foundry.utils.getProperty(this.item, prefix) || [];
+            const originalName = originalSkills[index]?.name || idValue;
+            formData[nameKey] = originalName;
+          }
+        } else {
+          formData[nameKey] = "";
+        }
+      }
+    };
+
+    populateNames("system.militarySkills");
+    populateNames("system.socialSkills");
+    populateNames("system.careerSkills");
+
+    return super._updateObject(event, formData);
   }
 
   /** @override */
