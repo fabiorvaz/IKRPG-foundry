@@ -93,6 +93,23 @@
       "SpeedModifier": "Modificador de Velocidade",
       "Description": "Descrição"
     },
+    "Consumable": {
+      "Badge": "Consumível",
+      "SheetName": "Ficha de Consumível",
+      "Type": "Tipo",
+      "TypePotion": "Poção",
+      "TypeElixir": "Elixir",
+      "TypeScroll": "Pergaminho",
+      "TypeFood": "Alimento/Ração",
+      "TypeAmmo": "Munição",
+      "TypeAlchemy": "Alquímico",
+      "TypeOther": "Outro",
+      "Quantity": "Quantidade",
+      "MultipleUses": "Múltiplos Usos?",
+      "UsesMax": "Quantidade de Usos",
+      "Price": "Preço (PO)",
+      "Weight": "Peso (Kg)"
+    },
     "Common": {
       "Identifier": "Identificador",
       "Properties": "Propriedades",

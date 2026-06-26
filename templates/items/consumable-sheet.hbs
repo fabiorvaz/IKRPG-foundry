@@ -1,0 +1,93 @@
+<form class="ikrpg-item-sheet {{cssClass}}" autocomplete="off">
+  <!-- Sheet Header -->
+  <header class="sheet-header">
+    <img class="profile-img" src="{{item.img}}" data-edit="img" title="{{item.name}}"/>
+    <div class="header-fields">
+      <h1 class="charname">
+        <input name="name" type="text" value="{{item.name}}" placeholder="{{localize 'IKRPG.Common.Name'}}" required />
+      </h1>
+      <div class="item-meta">
+        <span class="item-type-badge">{{localize "IKRPG.Consumable.Badge"}}</span>
+        <div class="item-identifier-group">
+          <label>{{localize "IKRPG.Common.Identifier"}}:</label>
+          <input name="system.identifier" type="text" value="{{system.identifier}}" placeholder="ex: unique-id" />
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Navigation Tabs -->
+  <nav class="sheet-tabs tabs" data-group="primary">
+    <a class="item" data-tab="properties"><i class="fas fa-sliders-h"></i> {{localize "IKRPG.Common.Properties"}}</a>
+    <a class="item" data-tab="description"><i class="fas fa-file-alt"></i> {{localize "IKRPG.Common.Description"}}</a>
+  </nav>
+
+  <!-- Sheet Body -->
+  <section class="sheet-body">
+    <!-- Properties Tab -->
+    <div class="tab properties active" data-group="primary" data-tab="properties">
+      <div class="properties-grid">
+        <!-- Consumable Type -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-flask"></i> {{localize "IKRPG.Consumable.Type"}}</span>
+          <div class="form-fields">
+            <select name="system.consumableType">
+              {{#select system.consumableType}}
+              {{#each consumableTypes}}
+              <option value="{{@key}}">{{this}}</option>
+              {{/each}}
+              {{/select}}
+            </select>
+          </div>
+        </div>
+
+        <!-- Quantity (Inventory Count) -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-boxes"></i> {{localize "IKRPG.Consumable.Quantity"}}</span>
+          <div class="form-fields">
+            <input name="system.quantity" type="number" value="{{system.quantity}}" min="0" step="1" />
+          </div>
+        </div>
+
+        <!-- Multiple Uses Flag -->
+        <div class="form-group checkbox-group">
+          <span class="form-label"><i class="fas fa-redo"></i> {{localize "IKRPG.Consumable.MultipleUses"}}</span>
+          <div class="form-fields">
+            <input name="system.multipleUses" type="checkbox" {{checked system.multipleUses}} />
+          </div>
+        </div>
+
+        <!-- Maximum Uses (Conditional) -->
+        {{#if system.multipleUses}}
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-battery-three-quarters"></i> {{localize "IKRPG.Consumable.UsesMax"}}</span>
+          <div class="form-fields">
+            <input name="system.usesMax" type="number" value="{{system.usesMax}}" min="1" step="1" />
+          </div>
+        </div>
+        {{/if}}
+
+        <!-- Price -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-coins"></i> {{localize "IKRPG.Consumable.Price"}}</span>
+          <div class="form-fields">
+            <input name="system.price" type="number" value="{{system.price}}" min="0" step="0.01" />
+          </div>
+        </div>
+
+        <!-- Weight -->
+        <div class="form-group">
+          <span class="form-label"><i class="fas fa-weight-hanging"></i> {{localize "IKRPG.Consumable.Weight"}}</span>
+          <div class="form-fields">
+            <input name="system.weight" type="number" value="{{system.weight}}" min="0" step="0.01" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Description Tab -->
+    <div class="tab description" data-group="primary" data-tab="description">
+      {{editor system.description target="system.description" button=true owner=owner editable=editable}}
+    </div>
+  </section>
+</form>

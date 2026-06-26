@@ -27,7 +27,8 @@
       "rangedWeapon",
       "ability",
       "spell",
-      "armor"
+      "armor",
+      "consumable"
     ]
   },
   "license": "MIT"
