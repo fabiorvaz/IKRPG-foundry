@@ -4,6 +4,9 @@
   "description": "Sistema de RPG para os Reinos de Ferro (2004) adaptado para Foundry VTT v13.",
   "version": "0.1.0",
   "author": "Fabio-Vaz",
+  "url": "https://github.com/fabiorvaz/IKRPG-foundry",
+  "manifest": "https://raw.githubusercontent.com/fabiorvaz/IKRPG-foundry/main/IKRPG/system.json",
+  "download": "https://github.com/fabiorvaz/IKRPG-foundry/releases/latest/download/ikrpg.zip",
   "compatibility": {
     "minimum": "13",
     "verified": "13"
