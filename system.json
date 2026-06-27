@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "author": "Fabio-Vaz",
   "url": "https://github.com/fabiorvaz/IKRPG-foundry",
-  "manifest": "https://raw.githubusercontent.com/fabiorvaz/IKRPG-foundry/main/IKRPG/system.json",
+  "manifest": "https://raw.githubusercontent.com/fabiorvaz/IKRPG-foundry/main/system.json",
   "download": "https://github.com/fabiorvaz/IKRPG-foundry/releases/latest/download/ikrpg.zip",
   "compatibility": {
     "minimum": "13",
