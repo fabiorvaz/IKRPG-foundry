@@ -83,25 +83,43 @@ export class CharacterData extends foundry.abstract.TypeDataModel {
   prepareDerivedData() {
     super.prepareDerivedData();
 
-    // 1. Vontade (Willpower): Físico + Intelecto
+    // 1. Acumular modificadores de armaduras e escudos equipados
+    let armorMod = 0;
+    let defMod = 0;
+    let spdMod = 0;
+
+    if (this.parent && this.parent.items) {
+      for (const item of this.parent.items) {
+        if (item.type === "armor" && item.system.equipped) {
+          armorMod += item.system.armorModifier || 0;
+          defMod += item.system.defenseModifier || 0;
+          spdMod += item.system.speedModifier || 0;
+        }
+      }
+    }
+
+    // 2. Vontade (Willpower): Físico + Intelecto
     const physique = this.attributes.physique.value || 0;
     const intellect = this.attributes.intellect.value || 0;
     this.willpower = physique + intellect;
 
-    // 2. Defesa (Defense): Velocidade + Agilidade + Percepção
+    // 3. Velocidade efetiva (considerando penalidades de armadura)
     const speed = this.attributes.speed.value || 0;
+    const effectiveSpeed = Math.max(0, speed + spdMod);
+
+    // 4. Defesa (Defense): Velocidade + Agilidade + Percepção + Modificadores de Equipamento
     const agility = this.attributes.agility.value || 0;
     const perception = this.attributes.perception.value || 0;
-    this.defense = speed + agility + perception;
+    this.defense = effectiveSpeed + agility + perception + defMod;
 
-    // 3. Armadura (Armor): Físico (Sem considerar equipamentos modificadores neste momento simples)
-    this.armor = physique;
+    // 5. Armadura (Armor): Físico + Modificadores de Equipamento
+    this.armor = physique + armorMod;
 
-    // 4. Iniciativa (Initiative): Velocidade + Maestria + Percepção
+    // 6. Iniciativa (Initiative): Velocidade + Maestria + Percepção (Usa velocidade efetiva)
     const mastery = this.attributes.mastery.value || 0;
-    this.initiative = speed + mastery + perception;
+    this.initiative = effectiveSpeed + mastery + perception;
 
-    // 5. Alcance de Comando (Command Range): Intelecto + Nível de Perícia Liderança/Command
+    // 7. Alcance de Comando (Command Range): Intelecto + Nível de Perícia Liderança/Command
     const commandSkill = this.skills.find(s => s.id === "command" || s.id === "lideranca");
     const commandLevel = commandSkill ? (commandSkill.level || 0) : 0;
     this.commandRange = intellect + commandLevel;

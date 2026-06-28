@@ -27,6 +27,9 @@ export class IKRPGCharacterSheet extends ActorSheet {
     const context = super.getData(options);
     context.system = this.actor.system;
 
+    // Define se a raça permite o uso de Arcana (Magia)
+    context.isArcanaAvailable = this.actor.system.attributes.arcana?.available !== false;
+
     // Categorizar itens embarcados do ator
     context.weaponsMelee = this.actor.items.filter(i => i.type === "meleeWeapon");
     context.weaponsRanged = this.actor.items.filter(i => i.type === "rangedWeapon");
