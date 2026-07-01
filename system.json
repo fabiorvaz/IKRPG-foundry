@@ -3,13 +3,27 @@
   "title": "Iron Kingdoms RPG (2004)",
   "description": "Sistema de RPG para os Reinos de Ferro (2004) adaptado para Foundry VTT v13.",
   "version": "0.1.0",
-  "author": "Fabio-Vaz",
+  "authors": [
+    {
+      "name": "Fabio Vaz",
+      "url": "https://github.com/fabiorvaz"
+    }
+  ],
+  "license": "MIT",
   "url": "https://github.com/fabiorvaz/IKRPG-foundry",
   "manifest": "https://raw.githubusercontent.com/fabiorvaz/IKRPG-foundry/main/system.json",
   "download": "https://github.com/fabiorvaz/IKRPG-foundry/releases/latest/download/ikrpg.zip",
+  "repository": "https://github.com/fabiorvaz/IKRPG-foundry",
+  "readme": "https://github.com/fabiorvaz/IKRPG-foundry/blob/main/README.md",
+  "bugs": "https://github.com/fabiorvaz/IKRPG-foundry/issues",
   "compatibility": {
     "minimum": "13",
-    "verified": "13"
+    "verified": "13",
+    "maximum": "13"
+  },
+  "relationships": {
+    "systems": [],
+    "requires": []
   },
   "esmodules": [
     "src/ikrpg.js"
@@ -41,5 +55,5 @@
       "career": {}
     }
   },
-  "license": "MIT"
+  "packs": []
 }
