@@ -234,7 +234,11 @@ Hooks.on("preCreateActor", (actor, data, options, userId) => {
     };
   });
 
-  actor.updateSource({ "system.skills": skills });
+  actor.updateSource({
+    system: {
+      skills: skills
+    }
+  });
 });
 
 // Hook para processar as importações de Raça e Carreira no ator de personagem

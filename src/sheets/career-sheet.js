@@ -110,29 +110,26 @@ export class IKRPGCareerSheet extends ItemSheet {
   activateListeners(html) {
     super.activateListeners(html);
 
-    // Helper to register add/delete click handlers for specific system array paths
     const registerListActions = (addSelector, deleteSelector, path, defaultValue) => {
       html.find(addSelector).click(async (event) => {
         event.preventDefault();
-        // Submit sheet first to preserve any pending manual changes
-        await this._onSubmit(event);
         
         const list = Array.from(foundry.utils.getProperty(this.item, path) || []);
         list.push(foundry.utils.deepClone(defaultValue));
         
-        await this.item.update({ [path]: list });
+        // Uma única submissão com os novos dados mesclados
+        await this._onSubmit(event, { updateData: { [path]: list } });
       });
 
       html.find(deleteSelector).click(async (event) => {
         event.preventDefault();
         const index = parseInt(event.currentTarget.dataset.index);
-        // Submit sheet first to preserve state
-        await this._onSubmit(event);
         
         const list = Array.from(foundry.utils.getProperty(this.item, path) || []);
         list.splice(index, 1);
         
-        await this.item.update({ [path]: list });
+        // Uma única submissão com os novos dados mesclados
+        await this._onSubmit(event, { updateData: { [path]: list } });
       });
     };
 

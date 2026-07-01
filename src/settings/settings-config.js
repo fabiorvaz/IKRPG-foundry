@@ -181,10 +181,82 @@ export class CustomSkillsConfigApp extends FormApplication {
       }).render(true);
     });
 
-    // Botão Atualizar Fichas (Atualmente não faz nada além de avisar)
-    html.find(".update-sheets-btn").click(event => {
+    // Botão Atualizar Fichas - Propaga as perícias customizadas globais para todos os atores
+    html.find(".update-sheets-btn").click(async event => {
       event.preventDefault();
-      ui.notifications.warn(game.i18n.localize("IKRPG.Settings.CustomSkills.UpdateSheetsSuccess"));
+      
+      // Salva o estado atual da tela antes de propagar
+      this._saveLocalState(html);
+      const customSkills = this.skills;
+      
+      // Filtra todos os atores do tipo character no mundo
+      const characters = game.actors.filter(a => a.type === "character");
+      let updatedCount = 0;
+
+      for (const actor of characters) {
+        const actorSkills = Array.from(actor.system.skills || []);
+        let changed = false;
+        const newSkills = [];
+
+        // 1. Atualiza perícias existentes no ator que ainda constam nas configurações
+        for (const actorSkill of actorSkills) {
+          const systemSkill = customSkills.find(s => s.id === actorSkill.id);
+          if (systemSkill) {
+            let attr = systemSkill.linkedAttribute;
+            if (systemSkill.category === "social" && !attr) {
+              attr = "intellect";
+            }
+
+            // Verifica se houve alguma alteração de propriedade para evitar atualizações redundantes
+            if (
+              actorSkill.trainedOnly !== !!systemSkill.trainedOnly ||
+              actorSkill.general !== !!systemSkill.general ||
+              actorSkill.category !== systemSkill.category ||
+              actorSkill.linkedAttribute !== attr
+            ) {
+              actorSkill.trainedOnly = !!systemSkill.trainedOnly;
+              actorSkill.general = !!systemSkill.general;
+              actorSkill.category = systemSkill.category;
+              actorSkill.linkedAttribute = attr;
+              changed = true;
+            }
+            newSkills.push(actorSkill);
+          } else {
+            // Mantém perícias antigas/deletadas na ficha como "Desconhecida" para não apagar dados do jogador
+            newSkills.push(actorSkill);
+          }
+        }
+
+        // 2. Adiciona perícias novas das configurações mundiais que o ator ainda não tem
+        for (const systemSkill of customSkills) {
+          const exists = newSkills.some(s => s.id === systemSkill.id);
+          if (!exists) {
+            let attr = systemSkill.linkedAttribute;
+            if (systemSkill.category === "social" && !attr) {
+              attr = "intellect";
+            }
+
+            newSkills.push({
+              id: systemSkill.id,
+              name: systemSkill.name || "",
+              nameKey: systemSkill.nameKey || "",
+              category: systemSkill.category || "professional",
+              linkedAttribute: attr || "physique",
+              level: 0,
+              trainedOnly: !!systemSkill.trainedOnly,
+              general: !!systemSkill.general
+            });
+            changed = true;
+          }
+        }
+
+        if (changed) {
+          await actor.update({ "system.skills": newSkills });
+          updatedCount++;
+        }
+      }
+
+      ui.notifications.info(`Fichas atualizadas com sucesso! ${updatedCount} personagens modificados.`);
     });
   }
 

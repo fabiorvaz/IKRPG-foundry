@@ -164,7 +164,7 @@
         <div class="vital-spiral-tracks">
           <!-- Physique 1 -->
           <div class="vital-spiral-track-row physique">
-            <span class="track-label">Físico 1</span>
+            <span class="track-label">{{localize "IKRPG.Character.VitalSpiralTracks.Physique1"}}</span>
             <div class="track-checkboxes" data-track="physique1">
               {{#each physique1_boxes}}
                 <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
@@ -173,7 +173,7 @@
           </div>
           <!-- Physique 2 -->
           <div class="vital-spiral-track-row physique">
-            <span class="track-label">Físico 2</span>
+            <span class="track-label">{{localize "IKRPG.Character.VitalSpiralTracks.Physique2"}}</span>
             <div class="track-checkboxes" data-track="physique2">
               {{#each physique2_boxes}}
                 <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
@@ -182,7 +182,7 @@
           </div>
           <!-- Agility 1 -->
           <div class="vital-spiral-track-row agility">
-            <span class="track-label">Agilidade 1</span>
+            <span class="track-label">{{localize "IKRPG.Character.VitalSpiralTracks.Agility1"}}</span>
             <div class="track-checkboxes" data-track="agility1">
               {{#each agility1_boxes}}
                 <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
@@ -191,7 +191,7 @@
           </div>
           <!-- Agility 2 -->
           <div class="vital-spiral-track-row agility">
-            <span class="track-label">Agilidade 2</span>
+            <span class="track-label">{{localize "IKRPG.Character.VitalSpiralTracks.Agility2"}}</span>
             <div class="track-checkboxes" data-track="agility2">
               {{#each agility2_boxes}}
                 <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
@@ -200,7 +200,7 @@
           </div>
           <!-- Intellect 1 -->
           <div class="vital-spiral-track-row intellect">
-            <span class="track-label">Intelecto 1</span>
+            <span class="track-label">{{localize "IKRPG.Character.VitalSpiralTracks.Intellect1"}}</span>
             <div class="track-checkboxes" data-track="intellect1">
               {{#each intellect1_boxes}}
                 <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
@@ -209,7 +209,7 @@
           </div>
           <!-- Intellect 2 -->
           <div class="vital-spiral-track-row intellect">
-            <span class="track-label">Intelecto 2</span>
+            <span class="track-label">{{localize "IKRPG.Character.VitalSpiralTracks.Intellect2"}}</span>
             <div class="track-checkboxes" data-track="intellect2">
               {{#each intellect2_boxes}}
                 <input type="checkbox" class="spiral-checkbox" data-index="{{this.index}}" {{#if this.checked}}checked{{/if}} />
@@ -243,11 +243,11 @@
           <table class="skills-table">
             <thead>
               <tr>
-                <th>Perícia</th>
-                <th>Atributo</th>
-                <th style="width: 80px; text-align: center;">Atributo</th>
-                <th style="width: 80px; text-align: center;">Nível</th>
-                <th style="width: 80px; text-align: center;">Total</th>
+                <th>{{localize "IKRPG.Career.Skill"}}</th>
+                <th>{{localize "IKRPG.Common.Attribute"}}</th>
+                <th style="width: 80px; text-align: center;">{{localize "IKRPG.Common.Attribute"}}</th>
+                <th style="width: 80px; text-align: center;">{{localize "IKRPG.Common.Level"}}</th>
+                <th style="width: 80px; text-align: center;">{{localize "IKRPG.Common.Total"}}</th>
               </tr>
             </thead>
             <tbody>
@@ -288,11 +288,11 @@
           <table class="skills-table">
             <thead>
               <tr>
-                <th>Perícia</th>
-                <th>Atributo</th>
-                <th style="width: 80px; text-align: center;">Atributo</th>
-                <th style="width: 80px; text-align: center;">Nível</th>
-                <th style="width: 80px; text-align: center;">Total</th>
+                <th>{{localize "IKRPG.Career.Skill"}}</th>
+                <th>{{localize "IKRPG.Common.Attribute"}}</th>
+                <th style="width: 80px; text-align: center;">{{localize "IKRPG.Common.Attribute"}}</th>
+                <th style="width: 80px; text-align: center;">{{localize "IKRPG.Common.Level"}}</th>
+                <th style="width: 80px; text-align: center;">{{localize "IKRPG.Common.Total"}}</th>
               </tr>
             </thead>
             <tbody>
@@ -333,11 +333,11 @@
           <table class="skills-table">
             <thead>
               <tr>
-                <th>Perícia</th>
-                <th>Atributo</th>
-                <th style="width: 80px; text-align: center;">Atributo</th>
-                <th style="width: 80px; text-align: center;">Nível</th>
-                <th style="width: 80px; text-align: center;">Total</th>
+                <th>{{localize "IKRPG.Career.Skill"}}</th>
+                <th>{{localize "IKRPG.Common.Attribute"}}</th>
+                <th style="width: 80px; text-align: center;">{{localize "IKRPG.Common.Attribute"}}</th>
+                <th style="width: 80px; text-align: center;">{{localize "IKRPG.Common.Level"}}</th>
+                <th style="width: 80px; text-align: center;">{{localize "IKRPG.Common.Total"}}</th>
               </tr>
             </thead>
             <tbody>
@@ -427,12 +427,12 @@
               <span><strong>POW:</strong> {{this.system.power}}</span>
               <span><strong>RNG:</strong> {{this.system.range}}</span>
               {{#if this.system.equipped}}
-                <span class="item-type-badge" style="background: var(--ikrpg-accent-teal); color:#fff; font-size:0.7rem;">Equipado</span>
+                <span class="item-type-badge" style="background: var(--ikrpg-accent-teal); color:#fff; font-size:0.7rem;">{{localize "IKRPG.Weapon.Equipped"}}</span>
               {{/if}}
             </div>
             <div class="item-actions">
-              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
-              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+              <button class="item-action-btn item-edit" title="{{localize 'IKRPG.Common.Edit'}}"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="{{localize 'IKRPG.Common.Delete'}}"><i class="fas fa-trash"></i></button>
             </div>
           </div>
           {{else}}
@@ -458,12 +458,12 @@
               <span><strong>DEF:</strong> {{this.system.defenseModifier}}</span>
               <span><strong>SPD:</strong> {{this.system.speedModifier}}</span>
               {{#if this.system.equipped}}
-                <span class="item-type-badge" style="background: var(--ikrpg-accent-teal); color:#fff; font-size:0.7rem;">Equipado</span>
+                <span class="item-type-badge" style="background: var(--ikrpg-accent-teal); color:#fff; font-size:0.7rem;">{{localize "IKRPG.Weapon.Equipped"}}</span>
               {{/if}}
             </div>
             <div class="item-actions">
-              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
-              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+              <button class="item-action-btn item-edit" title="{{localize 'IKRPG.Common.Edit'}}"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="{{localize 'IKRPG.Common.Delete'}}"><i class="fas fa-trash"></i></button>
             </div>
           </div>
           {{else}}
@@ -488,8 +488,8 @@
               <span><strong>Qtd:</strong> {{this.system.quantity}}</span>
             </div>
             <div class="item-actions">
-              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
-              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+              <button class="item-action-btn item-edit" title="{{localize 'IKRPG.Common.Edit'}}"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="{{localize 'IKRPG.Common.Delete'}}"><i class="fas fa-trash"></i></button>
             </div>
           </div>
           {{else}}
@@ -514,12 +514,12 @@
               <span><strong>Qtd:</strong> {{this.system.quantity}}</span>
             </div>
             <div class="item-actions">
-              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
-              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+              <button class="item-action-btn item-edit" title="{{localize 'IKRPG.Common.Edit'}}"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="{{localize 'IKRPG.Common.Delete'}}"><i class="fas fa-trash"></i></button>
             </div>
           </div>
           {{else}}
-          <div class="empty-placeholder" style="padding: 10px; text-align: center; color: var(--ikrpg-text-secondary);">Sem itens de miscelânea.</div>
+          <div class="empty-placeholder" style="padding: 10px; text-align: center; color: var(--ikrpg-text-secondary);">{{localize "IKRPG.Character.EmptyMiscellaneous"}}</div>
           {{/each}}
         </div>
       </div>
@@ -539,15 +539,15 @@
               <span>{{this.name}}</span>
             </div>
             <div class="item-details">
-              <span class="item-type-badge">{{localize (concat "IKRPG.Ability.Type" (capitalize this.system.type))}}</span>
+              <span class="item-type-badge">{{localize (concat "IKRPG.Ability.Type" (capitalize this.system.abilityType))}}</span>
             </div>
             <div class="item-actions">
-              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
-              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+              <button class="item-action-btn item-edit" title="{{localize 'IKRPG.Common.Edit'}}"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="{{localize 'IKRPG.Common.Delete'}}"><i class="fas fa-trash"></i></button>
             </div>
           </div>
           {{else}}
-          <div class="empty-placeholder" style="padding: 16px; text-align: center; color: var(--ikrpg-text-secondary);">Sem habilidades importadas.</div>
+          <div class="empty-placeholder" style="padding: 16px; text-align: center; color: var(--ikrpg-text-secondary);">{{localize "IKRPG.Character.EmptyAbilities"}}</div>
           {{/each}}
         </div>
       </div>
@@ -573,12 +573,12 @@
               <span><strong>RNG:</strong> {{this.system.range}}</span>
             </div>
             <div class="item-actions">
-              <button class="item-action-btn item-edit" title="Editar"><i class="fas fa-edit"></i></button>
-              <button class="item-action-btn delete item-delete" title="Excluir"><i class="fas fa-trash"></i></button>
+              <button class="item-action-btn item-edit" title="{{localize 'IKRPG.Common.Edit'}}"><i class="fas fa-edit"></i></button>
+              <button class="item-action-btn delete item-delete" title="{{localize 'IKRPG.Common.Delete'}}"><i class="fas fa-trash"></i></button>
             </div>
           </div>
           {{else}}
-          <div class="empty-placeholder" style="padding: 16px; text-align: center; color: var(--ikrpg-text-secondary);">Sem magias aprendidas.</div>
+          <div class="empty-placeholder" style="padding: 16px; text-align: center; color: var(--ikrpg-text-secondary);">{{localize "IKRPG.Character.EmptySpells"}}</div>
           {{/each}}
         </div>
       </div>

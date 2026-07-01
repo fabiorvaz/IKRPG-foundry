@@ -4,7 +4,7 @@
     <h2><i class="fas fa-list-ul"></i> {{localize "IKRPG.Settings.CustomSkills.Title"}}</h2>
     <p>{{localize "IKRPG.Settings.CustomSkillsMenu.Hint"}}</p>
     <div class="legend-note">
-      <small><strong>Nota:</strong> O "Identificador (ID)" deve ser em letras minúsculas e inglês (ex: <code>pistol</code>) para que itens e regras funcionem de forma consistente independente da tradução.</small>
+      <small>{{localize "IKRPG.Settings.CustomSkills.HelpNote"}}</small>
     </div>
   </div>
 
@@ -29,7 +29,7 @@
               <th>{{localize "IKRPG.Settings.CustomSkills.FieldAttribute"}}</th>
               <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldTrained"}}</th>
               <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldGeneral"}}</th>
-              <th class="text-center">Excluir</th>
+              <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.DeleteHeader"}}</th>
             </tr>
           </thead>
           <tbody>
@@ -65,7 +65,7 @@
             {{/each}}
             {{#unless military.length}}
             <tr>
-              <td colspan="6" class="empty-placeholder">Nenhuma perícia militar configurada.</td>
+              <td colspan="6" class="empty-placeholder">{{localize "IKRPG.Settings.CustomSkills.EmptyMilitary"}}</td>
             </tr>
             {{/unless}}
           </tbody>
@@ -91,7 +91,7 @@
               <th>{{localize "IKRPG.Settings.CustomSkills.FieldAttribute"}}</th>
               <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldTrained"}}</th>
               <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldGeneral"}}</th>
-              <th class="text-center">Excluir</th>
+              <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.DeleteHeader"}}</th>
             </tr>
           </thead>
           <tbody>
@@ -127,7 +127,7 @@
             {{/each}}
             {{#unless professional.length}}
             <tr>
-              <td colspan="6" class="empty-placeholder">Nenhuma perícia profissional configurada.</td>
+              <td colspan="6" class="empty-placeholder">{{localize "IKRPG.Settings.CustomSkills.EmptyProfessional"}}</td>
             </tr>
             {{/unless}}
           </tbody>
@@ -153,7 +153,7 @@
               <!-- Atributo associado omitido propositalmente -->
               <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldTrained"}}</th>
               <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.FieldGeneral"}}</th>
-              <th class="text-center">Excluir</th>
+              <th class="text-center">{{localize "IKRPG.Settings.CustomSkills.DeleteHeader"}}</th>
             </tr>
           </thead>
           <tbody>
@@ -180,7 +180,7 @@
             {{/each}}
             {{#unless social.length}}
             <tr>
-              <td colspan="5" class="empty-placeholder">Nenhuma perícia social configurada.</td>
+              <td colspan="5" class="empty-placeholder">{{localize "IKRPG.Settings.CustomSkills.EmptySocial"}}</td>
             </tr>
             {{/unless}}
           </tbody>

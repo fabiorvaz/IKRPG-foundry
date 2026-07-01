@@ -19,7 +19,16 @@
       "Mastery": "Maestria",
       "Intellect": "Intelecto",
       "Arcana": "Arcana",
-      "Perception": "Percepção"
+      "Perception": "Percepção",
+      "PhysiqueAbbr": "FÍS",
+      "StrengthAbbr": "FOR",
+      "SpeedAbbr": "VEL",
+      "AgilityAbbr": "AGI",
+      "DexterityAbbr": "DES",
+      "MasteryAbbr": "MAE",
+      "IntellectAbbr": "INT",
+      "ArcanaAbbr": "ARC",
+      "PerceptionAbbr": "PER"
     },
     "AttributeMapping": {
       "Físico": "physique",
@@ -122,6 +131,7 @@
     },
     "Race": {
       "Badge": "Raça",
+      "MaxStats": "/ Atributos Máximos",
       "SheetName": "Ficha de Raça",
       "BaseStats": "Base",
       "MaxStatsHeroic": "Máx Heróico",
@@ -140,6 +150,7 @@
     "Career": {
       "Badge": "Carreira",
       "SheetName": "Ficha de Carreira",
+      "StartingItemsPlaceholder": "Ex: 1x Pistola, Kit de Reparos",
       "TabGeneral": "Geral",
       "TabSkills": "Perícias",
       "TabAbilities": "Habilidades",
@@ -188,7 +199,13 @@
       "Identifier": "Identificador",
       "Properties": "Propriedades",
       "Description": "Descrição",
-      "Name": "Nome"
+      "Name": "Nome",
+      "Action": "Ação",
+      "Delete": "Excluir",
+      "Edit": "Editar",
+      "Attribute": "Atributo",
+      "Level": "Nível",
+      "Total": "Total"
     },
     "Character": {
       "Badge": "Personagem do Jogador",
@@ -206,6 +223,17 @@
       "TierEpic": "Épico",
       "FeatPoints": "Pontos de Façanha",
       "VitalSpiral": "Espiral Vital (Simples)",
+      "VitalSpiralTracks": {
+        "Physique1": "Físico 1",
+        "Physique2": "Físico 2",
+        "Agility1": "Agilidade 1",
+        "Agility2": "Agilidade 2",
+        "Intellect1": "Intelecto 1",
+        "Intellect2": "Intelecto 2"
+      },
+      "EmptyMiscellaneous": "Sem itens de miscelânea.",
+      "EmptyAbilities": "Sem habilidades importadas.",
+      "EmptySpells": "Sem magias importadas.",
       "ForceField": "Campo de Força",
       "ForceFieldEnabled": "Ativado",
       "Willpower": "Vontade",
@@ -281,7 +309,12 @@
         "DeleteSuccess": "Perícia removida.",
         "RestoreSuccess": "Lista de perícias restaurada para o padrão com sucesso!",
         "UpdateSheetsSuccess": "Atualização das fichas de personagens simulada com sucesso!",
-        "NotifySave": "Configurações de perícias salvas com sucesso!"
+        "NotifySave": "Configurações de perícias salvas com sucesso!",
+        "HelpNote": "Nota: O Identificador (ID) deve ser em letras minúsculas e inglês (ex: pistol) para que itens e regras funcionem de forma consistente independente da tradução.",
+        "DeleteHeader": "Excluir",
+        "EmptyMilitary": "Nenhuma perícia militar configurada.",
+        "EmptyProfessional": "Nenhuma perícia profissional configurada.",
+        "EmptySocial": "Nenhuma perícia social configurada."
       }
     }
   }

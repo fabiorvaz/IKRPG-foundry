@@ -52,12 +52,12 @@
         <!-- Tabela de Limites e Valores de Atributos -->
         <div class="form-group stats-table-group" style="display: flex; flex-direction: column; align-items: stretch; border-bottom: none; padding-top: 10px;">
           <span class="form-label" style="margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 5px; width: 100%;">
-            <i class="fas fa-chart-bar"></i> {{localize "IKRPG.Race.BaseStats"}} / Atributos Máximos
+            <i class="fas fa-chart-bar"></i> {{localize "IKRPG.Race.BaseStats"}} {{localize "IKRPG.Race.MaxStats"}}
           </span>
           <table class="race-stats-table" style="width: 100%; border-collapse: collapse; margin-top: 6px;">
             <thead>
               <tr style="border-bottom: 2px solid rgba(255,255,255,0.1); font-size: 0.85rem; color: var(--ikrpg-accent-gold);">
-                <th style="text-align: left; padding: 6px 4px; text-transform: uppercase;">Atributo</th>
+                <th style="text-align: left; padding: 6px 4px; text-transform: uppercase;">{{localize "IKRPG.Common.Attribute"}}</th>
                 <th style="text-align: center; padding: 6px 4px; width: 75px; text-transform: uppercase;">{{localize "IKRPG.Race.BaseStats"}}</th>
                 <th style="text-align: center; padding: 6px 4px; width: 85px; text-transform: uppercase;">{{localize "IKRPG.Race.MaxStatsHeroic"}}</th>
                 <th style="text-align: center; padding: 6px 4px; width: 85px; text-transform: uppercase;">{{localize "IKRPG.Race.MaxStatsVeteran"}}</th>
@@ -67,7 +67,7 @@
             <tbody>
               <!-- Physique -->
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Physique"}} (FÍS)</td>
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Physique"}} ({{localize "IKRPG.Attribute.PhysiqueAbbr"}})</td>
                 <td style="padding: 4px; text-align: center;">
                   <input name="system.baseStats.physique" type="number" value="{{system.baseStats.physique}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
                 </td>
@@ -83,7 +83,7 @@
               </tr>
               <!-- Strength -->
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Strength"}} (FOR)</td>
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Strength"}} ({{localize "IKRPG.Attribute.StrengthAbbr"}})</td>
                 <td style="padding: 4px; text-align: center;">
                   <input name="system.baseStats.strength" type="number" value="{{system.baseStats.strength}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
                 </td>
@@ -99,7 +99,7 @@
               </tr>
               <!-- Speed -->
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Speed"}} (VEL)</td>
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Speed"}} ({{localize "IKRPG.Attribute.SpeedAbbr"}})</td>
                 <td style="padding: 4px; text-align: center;">
                   <input name="system.baseStats.speed" type="number" value="{{system.baseStats.speed}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
                 </td>
@@ -115,7 +115,7 @@
               </tr>
               <!-- Agility -->
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Agility"}} (AGI)</td>
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Agility"}} ({{localize "IKRPG.Attribute.AgilityAbbr"}})</td>
                 <td style="padding: 4px; text-align: center;">
                   <input name="system.baseStats.agility" type="number" value="{{system.baseStats.agility}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
                 </td>
@@ -131,7 +131,7 @@
               </tr>
               <!-- Dexterity -->
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Dexterity"}} (DES)</td>
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Dexterity"}} ({{localize "IKRPG.Attribute.DexterityAbbr"}})</td>
                 <td style="padding: 4px; text-align: center;">
                   <input name="system.baseStats.dexterity" type="number" value="{{system.baseStats.dexterity}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
                 </td>
@@ -147,7 +147,7 @@
               </tr>
               <!-- Mastery -->
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Mastery"}} (MAE)</td>
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Mastery"}} ({{localize "IKRPG.Attribute.MasteryAbbr"}})</td>
                 <td style="padding: 4px; text-align: center;">
                   <input name="system.baseStats.mastery" type="number" value="{{system.baseStats.mastery}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
                 </td>
@@ -163,7 +163,7 @@
               </tr>
               <!-- Intellect -->
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Intellect"}} (INT)</td>
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Intellect"}} ({{localize "IKRPG.Attribute.IntellectAbbr"}})</td>
                 <td style="padding: 4px; text-align: center;">
                   <input name="system.baseStats.intellect" type="number" value="{{system.baseStats.intellect}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
                 </td>
@@ -179,7 +179,7 @@
               </tr>
               <!-- Arcana -->
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Arcana"}} (ARC)</td>
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Arcana"}} ({{localize "IKRPG.Attribute.ArcanaAbbr"}})</td>
                 <td style="padding: 4px; text-align: center;">
                   <input name="system.baseStats.arcana" type="number" value="{{system.baseStats.arcana}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
                 </td>
@@ -195,7 +195,7 @@
               </tr>
               <!-- Perception -->
               <tr style="border-bottom: 1px solid rgba(255,255,255,0.04);">
-                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Perception"}} (PER)</td>
+                <td style="padding: 6px 4px; font-weight: 500;">{{localize "IKRPG.Attribute.Perception"}} ({{localize "IKRPG.Attribute.PerceptionAbbr"}})</td>
                 <td style="padding: 4px; text-align: center;">
                   <input name="system.baseStats.perception" type="number" value="{{system.baseStats.perception}}" style="width: 55px; text-align: center; background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.1); color: #fff;" min="0" />
                 </td>

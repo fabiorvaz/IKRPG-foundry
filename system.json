@@ -25,21 +25,21 @@
     }
   ],
   "documentTypes": {
-    "Actor": [
-      "character"
-    ],
-    "Item": [
-      "meleeWeapon",
-      "rangedWeapon",
-      "ability",
-      "spell",
-      "armor",
-      "consumable",
-      "miscellaneous",
-      "archetype",
-      "race",
-      "career"
-    ]
+    "Actor": {
+      "character": {}
+    },
+    "Item": {
+      "meleeWeapon": {},
+      "rangedWeapon": {},
+      "ability": {},
+      "spell": {},
+      "armor": {},
+      "consumable": {},
+      "miscellaneous": {},
+      "archetype": {},
+      "race": {},
+      "career": {}
+    }
   },
   "license": "MIT"
 }

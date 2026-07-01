@@ -77,7 +77,13 @@ export class IKRPGCharacterSheet extends ActorSheet {
 
     // Preparar dados das perícias enriquecidas
     const enrichedSkills = (this.actor.system.skills || []).map((skill, index) => {
-      const isArcana = skill.linkedAttribute === "arcana";
+      // Fallback seguro caso o atributo associado esteja vazio (ex: perícias sociais customizadas)
+      let linkedAttribute = skill.linkedAttribute;
+      if (!linkedAttribute) {
+        linkedAttribute = skill.category === "social" ? "intellect" : "physique";
+      }
+
+      const isArcana = linkedAttribute === "arcana";
       const isArcanaAvailable = this.actor.system.attributes.arcana?.available !== false;
       
       let attributeValue = 0;
@@ -87,7 +93,7 @@ export class IKRPGCharacterSheet extends ActorSheet {
         attributeValue = 0;
         attributeDisplay = "-";
       } else {
-        attributeValue = this.actor.system.attributes[skill.linkedAttribute]?.value || 0;
+        attributeValue = this.actor.system.attributes[linkedAttribute]?.value || 0;
         attributeDisplay = String(attributeValue);
       }
 
@@ -122,6 +128,7 @@ export class IKRPGCharacterSheet extends ActorSheet {
 
       return {
         ...skill,
+        linkedAttribute, // Garante que o template use o fallback resolvido para selecionar no dropdown
         index,
         displayName,
         trainedOnly,
